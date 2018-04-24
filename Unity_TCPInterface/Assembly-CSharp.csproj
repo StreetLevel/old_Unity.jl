@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D9DC1BF0-76C5-ADCE-B89C-E3E5242638D4}</ProjectGuid>
+    <ProjectGuid>{7963B0F1-4493-AAE3-1DA5-54A678B1FBFF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,9 +61,11 @@
      <None Include="Assets\Shaders\WorldSpaceNormals.shader" />
      <None Include="Assets\Shaders\Grid.shader" />
      <None Include="Assets\Shaders\Disk.shader" />
+     <None Include="Assets\Shaders\Custom.shader" />
      <None Include="Assets\Shaders\MyDeferredShading.cginc" />
      <None Include="Assets\Shaders\MyFlatWireframe.cginc" />
      <None Include="Assets\Shaders\StandartVertex.shader" />
+     <None Include="Assets\Shaders\Common.cginc" />
      <None Include="Assets\Shaders\Flat.shader" />
      <None Include="Assets\Shaders\My Lightmapping.cginc" />
      <None Include="Assets\Shaders\My Lighting Input.cginc" />

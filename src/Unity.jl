@@ -16,7 +16,7 @@ function accept!(tcpstream::TcpStream)
         tcpstream.conn = conn
     end
 end
-#function Base.write(tcpstream::TcpStream, msg::ASCIIString)
+
 function Base.write(tcpstream::TcpStream, msg::String)
     if !isnull(tcpstream.conn)
         write(tcpstream.conn.value, msg)

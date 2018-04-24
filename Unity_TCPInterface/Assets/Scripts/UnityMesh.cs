@@ -95,12 +95,12 @@ public class UnityMesh
 	{
 		for(int i = 0; i < this.options.Length; i++)
 		{	
-			Debug.Log(this.options[i]);
+			//Debug.Log(this.options[i]);
 			string[] strArr = this.options[i].Split("="[0]);
-			Debug.Log(strArr[0]);
-			Debug.Log(strArr[0].Trim().Equals(str+"_shader"));
+			//Debug.Log(strArr[0]);
+			//Debug.Log(strArr[0].Trim().Equals(str+"_shader"));
 			if (strArr[0].Trim().Equals(str+"_shader")){
-				Debug.Log(strArr[1].Trim());
+				//Debug.Log(strArr[1].Trim());
 				set_shader_options(gameObject,strArr[1].Trim());
 			}
 
