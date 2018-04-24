@@ -1,0 +1,6 @@
+./test/**
+./src/AnsysReader.jl
+./src/MeshReaders.jl
+./src/PatranReader.jl
+./test/**
+./models/**
