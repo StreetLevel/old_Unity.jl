@@ -69,5 +69,5 @@ You should see something like this:
 ## Different shaders for surface meshes
 
 | wireframe             |  flat | smooth |
-:-------------------------:|:-------------------------:|
-![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_wireframe_shader.png "wireframe shader")  |  ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_flat_shader.png "flat_shader") | ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_smooth_shader.png "smooth shader") |
+|:-------------------------:|:-------------------------:|
+
