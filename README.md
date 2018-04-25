@@ -5,7 +5,7 @@
 [![codecov.io](http://codecov.io/github/StreetLevel/Unity.jl/coverage.svg?branch=master)](http://codecov.io/github/StreetLevel/Unity.jl?branch=master)
 
 # Unity.jl 
-## A 3d scientific visualization interface for Unity
+## A scientific visualization interface for Unity
 
 This library provides a TCP-Interface for the transmission of 3d mesh-data between Julia and Unity. 
 
