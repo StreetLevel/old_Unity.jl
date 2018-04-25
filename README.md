@@ -68,9 +68,11 @@ You should see something like this:
 
 ## Different shaders for surface meshes
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| wireframe                        | flat                       | smooth                       |
+| -------------------------------- |:--------------------------:| ----------------------------:|
+| ![img_bone][img_bone_wireframe]  | ![img_bone][img_bone_flat] | ![img_bone][img_bone_smooth] |
+
+[img_bone_wireframe]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_wireframe_shader.png "wireframe shader"
+[img_bone_flat]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_flat_shader.png "flat_shader"
+[img_bone_smooth]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_smooth_shader.png "smooth shader"
 
