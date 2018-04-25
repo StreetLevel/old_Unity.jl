@@ -2,5 +2,9 @@
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
-./test/test_gmsh.jl
+test/test_gmsh.jl
+models/**
+src/AnsysReader.jl
+src/MeshReaders.jl
+src/PatranReader.jl
 
