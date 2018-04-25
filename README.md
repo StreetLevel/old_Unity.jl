@@ -21,11 +21,11 @@ Pkg.clone("https://github.com/StreetLevel/Unity.jl")
 
 ### Agenda
 
-In numeric simulation we operate mostly on mesh-data, so we need easy-to-use but efficent tools for visualization for fast development cycles. The "de-facto-standard" MATLAB covers this with its patch-routine. Here Unity is used for visualization, which is a great and active developed platform. Once you've got your data imported into Unity, you can take advantage of a huge community and tons of addons for high-quality custom plots. Furthermore Unity runs on various platforms, so, with little effort, you could use your tablet or even mobile phone for displaying the output.
+In numeric simulation we operate mostly on mesh-data, so we need easy-to-use but efficient tools for visualization for fast development cycles. The "de-facto-standard" MATLAB covers this with its patch-routine. Here Unity is used for visualization, which is a great and active developed platform. Once you've got your data imported into Unity, you can take advantage of a huge community and tons of add-ons for high-quality custom plots. Furthermore Unity runs on various platforms, so, with little effort, you could use your tablet or even mobile phone for displaying the output.
 
 ### Usage
 
-This package is in a very early developement stage but to my knowledge it should work.
+This package is in a very early development stage but to my knowledge it should work.
 
 1. *Unity:* Start Unity and load the Unity Project *Unity_TCPInterface*.
 2. *Unity:* Load Scene1
@@ -36,7 +36,7 @@ using ColorTypes
 tcpstream = TcpStream(8052)
 accept!(tcpstream)
 ```
-4. *Unity:* Press Play (Now the connection is set up and you can begin to draw. I will make this way more convient in the next few month)
+4. *Unity:* Press Play (Now the connection is set up and you can begin to draw. I will make this way more convenient in the next few month)
 5. *Julia:* 
 ```Julia
 #define vertices
@@ -70,7 +70,7 @@ write(tcpstream, mesh)
 You should see something like this:
 ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")
 
-## Different shaders for surface meshes
+## Different shader for surface meshes
 
 | wireframe                        | flat                       | smooth                       |
 | :------------------------------: |:--------------------------:| :---------------------------:|
@@ -84,10 +84,10 @@ You should see something like this:
 
 * face colors (could be already done by duplicating the vertices for each connected face)
 * auto setup of tcp connection
-* simple gui for ip adress etc.
+* simple gui for ip address etc.
 * partial transmission of meshes (e.g. only update the vertices or colors)
 * colorbar
-* coodinate axes
+* coordinate axes
 * transparency
 * nicer shader for line mesh
 * nicer shader and primitive for point mesh
