@@ -12,7 +12,7 @@ This library provides a TCP-Interface for the transmission of mesh-data between 
 
 ### Installation
 
-You need Unity installed, which is free for non-profit use. I got Version 2017.4.1f1 (9231f953d9d3) Personal installed on a MacBook with macOS 10.13.3.
+You need Unity to be installed, which is free for non-profit use. I got Version 2017.4.1f1 (9231f953d9d3) Personal installed on a MacBook with macOS 10.13.3.
 
 Please run:
 ```Julia
