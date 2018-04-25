@@ -66,6 +66,6 @@ write(tcpstream, point_mesh)
 write(tcpstream, mesh)
 ```
 You should see something like this:
-![alt text](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")
+![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")
 
 
