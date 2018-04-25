@@ -10,7 +10,7 @@
 This library provides a TCP-Interface for the transmission of mesh-data between Julia and Unity. 
 
 
-### Intallation
+### Installation
 
 You need Unity installed, which is free for non-profit use. I got Version 2017.4.1f1 (9231f953d9d3) Personal installed on a MacBook with macOS 10.13.3.
 
@@ -18,6 +18,10 @@ Please run:
 ```Julia
 Pkg.clone("https://github.com/StreetLevel/Unity.jl")
 ```
+
+### Agenda
+
+In numeric simulation we operate mostly on mesh-data, so we need easy-to-use but efficent tools for visualization for fast development cycles. The "de-facto-standard" MATLAB covers this with its patch-routine. Here Unity is used for visualization, which is a great and active developed platform. Once you've got your data imported into Unity, you can take advantage of a huge community and tons of addons for high-quality custom plots. Furthermore Unity runs on various platforms, so, with little effort, you could use your tablet or even mobile phone for displaying the output.
 
 ### Usage
 
@@ -75,4 +79,17 @@ You should see something like this:
 [img_bone_wireframe]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_wireframe_shader.png "wireframe shader"
 [img_bone_flat]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_flat_shader.png "flat_shader"
 [img_bone_smooth]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_smooth_shader.png "smooth shader"
+
+## TODO
+
+* face colors (could be already done by duplicating the vertices for each connecting face)
+* auto setup of tcp connection
+* simple gui for ip adress etc.
+* partial transmission of meshes (e.g. only update the vertices or colors)
+* colorbar
+* coodinate axes
+* transparency
+* nicer shader for line mesh
+* nicer shader and primitive for point mesh
+* quad meshes
 
