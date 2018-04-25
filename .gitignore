@@ -6,5 +6,5 @@
 ./src/AnsysReader.jl
 ./src/MeshReaders.jl
 ./src/PatranReader.jl
-./test/**
+./test/test_gmsh.jl
 ./models/**
