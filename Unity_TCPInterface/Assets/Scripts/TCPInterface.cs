@@ -15,8 +15,6 @@ public class TCPInterface : MonoBehaviour
 		private Dictionary<string,Mesh> meshdict;
 		private Dictionary<string,GameObject> godict;
 		private Queue<UnityMesh> meshqueue;
-		//private UnityMesh rec_msh = null;
-		//private int id_bit_mask = 0x7fffffc0;
 		private static string id_tri = " Surface";
 		private static string id_line = " Line";
 		private static string id_vert = " Point";
@@ -149,9 +147,7 @@ public class TCPInterface : MonoBehaviour
 												{
 														//Debug.Log ("End of Message");
 														//Debug.Log(serverMessage);
-														//Debug.Log(serverMessage.Substring(0,serverMessage.Length - 25));
 														sb.Append (serverMessage.Substring(0,serverMessage.Length - 25));
-														//Debug.Log(sb.ToString());
 														UnityMesh rec_msh = JsonUtility.FromJson<UnityMesh> (sb.ToString ());
 														meshqueue.Enqueue(rec_msh);	
 														sb = new StringBuilder ();
