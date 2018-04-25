@@ -18,7 +18,7 @@ You need Unity installed, which is free for non-profit use. I got Version 2017.4
 
 Please run:
 ```Julia
-Pkg.add("Unity")
+Pkg.clone("https://github.com/StreetLevel/Unity.jl")
 ```
 
 ### Usage
