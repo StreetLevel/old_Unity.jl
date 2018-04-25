@@ -69,5 +69,5 @@ You should see something like this:
 ## Different shaders for surface meshes
 
 | wireframe             |  flat | smooth |
-|:-------------------------:|:-------------------------:|
+| --------------------- |:-----:| ------:|
 
