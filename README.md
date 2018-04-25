@@ -66,7 +66,7 @@ write(tcpstream, mesh)
 You should see something like this:
 ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")
 
-## Different shaders for surface mesher
+## Different shaders for surface meshes
 
 | wireframe             |  flat | smooth |
 :-------------------------:|:-------------------------:
