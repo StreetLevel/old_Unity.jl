@@ -2,6 +2,7 @@
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
+*.sublime-workspace
 test/test_gmsh.jl
 models/**
 src/AnsysReader.jl

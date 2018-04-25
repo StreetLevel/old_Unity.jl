@@ -66,4 +66,8 @@ write(tcpstream, mesh)
 You should see something like this:
 ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")
 
+## Different shaders for surface mesher
 
+| wireframe             |  flat | smooth |
+:-------------------------:|:-------------------------:
+![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_wireframe_shader.png "wireframe shader")  |  ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_flat_shader.png "flat_shader") | ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_smooth_shader.png "smooth shader")
