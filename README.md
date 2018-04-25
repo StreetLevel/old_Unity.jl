@@ -68,6 +68,9 @@ You should see something like this:
 
 ## Different shaders for surface meshes
 
-| wireframe             |  flat | smooth |
-| --------------------- |:-----:| ------:|
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
