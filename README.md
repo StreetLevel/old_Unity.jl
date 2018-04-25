@@ -82,7 +82,7 @@ You should see something like this:
 
 ## TODO
 
-* face colors (could be already done by duplicating the vertices for each connecting face)
+* face colors (could be already done by duplicating the vertices for each connected face)
 * auto setup of tcp connection
 * simple gui for ip adress etc.
 * partial transmission of meshes (e.g. only update the vertices or colors)
