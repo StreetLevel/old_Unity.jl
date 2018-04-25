@@ -14,7 +14,8 @@ public class TCPInterface : MonoBehaviour
 		private Thread clientReceiveThread;
 		private Dictionary<string,Mesh> meshdict;
 		private Dictionary<string,GameObject> godict;
-		private UnityMesh rec_msh = null;
+		private Queue<UnityMesh> meshqueue;
+		//private UnityMesh rec_msh = null;
 		//private int id_bit_mask = 0x7fffffc0;
 		private static string id_tri = " Surface";
 		private static string id_line = " Line";
@@ -27,6 +28,7 @@ public class TCPInterface : MonoBehaviour
 
 				meshdict = new Dictionary<string,Mesh> ();
 				godict = new Dictionary<string,GameObject> ();
+				meshqueue = new Queue<UnityMesh> ();
 
 				// Connect to Server
 				ConnectToTcpServer ();
@@ -36,7 +38,9 @@ public class TCPInterface : MonoBehaviour
 		void Update ()
 		{
 		
-				if (rec_msh != null) {
+				while (meshqueue.Count > 0) {
+					
+					UnityMesh rec_msh = meshqueue.Dequeue();
 
 						if (rec_msh.triangles.Length > 2) {
 								//triangle mesh
@@ -148,9 +152,10 @@ public class TCPInterface : MonoBehaviour
 														//Debug.Log(serverMessage.Substring(0,serverMessage.Length - 25));
 														sb.Append (serverMessage.Substring(0,serverMessage.Length - 25));
 														//Debug.Log(sb.ToString());
-														rec_msh = JsonUtility.FromJson<UnityMesh> (sb.ToString ());
+														UnityMesh rec_msh = JsonUtility.FromJson<UnityMesh> (sb.ToString ());
+														meshqueue.Enqueue(rec_msh);	
 														sb = new StringBuilder ();
-														Canvas.ForceUpdateCanvases ();
+
 												}
 												else
 												{
