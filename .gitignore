@@ -1,4 +1,3 @@
-
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
@@ -8,4 +7,15 @@ models/**
 src/AnsysReader.jl
 src/MeshReaders.jl
 src/PatranReader.jl
+Unity_TCPInterface/Library*
+Unity_TCPInterface/Library/
+Unity_TCPInterface/Library/*
+Unity_TCPInterface/Library/**
+Unity_TCPInterface/Temp*
+Unity_TCPInterface/Temp/
+Unity_TCPInterface/Temp/*
+Unity_TCPInterface/Temp/**
+
+
+
 

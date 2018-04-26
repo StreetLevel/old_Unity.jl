@@ -3,32 +3,13 @@ import JSON
 import ColorTypes
 import Base.TCPServer
 import GeometryTypes
-type TcpStream
-    server::TCPServer
-    conn::Nullable{TCPSocket}
-    #ip"127.0.0.1",
-    TcpStream(port::Int) = new(listen(port),Nullable{TCPSocket}())
-end
-function accept!(tcpstream::TcpStream)
-    @async begin
-        conn = accept(tcpstream.server)
-        tcpstream.conn = conn
-    end
-end
 
-function Base.write(tcpstream::TcpStream, msg::String)
-    if !isnull(tcpstream.conn)
-        write(tcpstream.conn.value, msg)
-        return true
-    else
-        return false
-    end
-end
 type Vector3
     x::Float32
     y::Float32
     z::Float32
 end
+
 #Unity mesh with c-like indexing
 type UnityMesh
     id::String
@@ -39,10 +20,14 @@ type UnityMesh
     colors::Vector{ColorTypes.RGBA{Float32}}
     options::Vector{String}
 end
-function Base.write(tcpstream::TcpStream, um::UnityMesh)
+
+function Base.write(socket::TCPSocket, um::UnityMesh)
     jum = JSON.json(um)
-    return write(tcpstream, jum*"UNITY_MESH_JSON_FORMATTED")
+    retval = write(socket, jum*"UNITY_MESH_JSON_FORMATTED")
+    sleep(.1)
+    return retval
 end
+
 #Unity Pyramid mesh with c-like indices
 type PyramidMesh
     id::String
@@ -110,7 +95,7 @@ function convert_and_duplicate(::Type{UnityMesh},msh::PyramidMesh,pattern::Vecto
 
 end
 
-function Base.write(tcpstream::TcpStream, um::PyramidMesh)
+function Base.write(tcpstream::TCPSocket, um::PyramidMesh)
     jum = JSON.json(convert(UnityMesh,um))
     return write(tcpstream, jum)
 end
@@ -121,7 +106,7 @@ function boundary(upm::PyramidMesh)
     pyramids = Vector{Int32}()
     clrs = Vector{ColorTypes.RGBA{Float32}}()
     for i = 1:4:length(upm.pyramids)
-
+        # todo
     end
 end
 end #module Unity
