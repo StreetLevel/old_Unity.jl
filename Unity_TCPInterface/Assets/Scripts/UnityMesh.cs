@@ -46,13 +46,35 @@ public class UnityMesh
 	}
 		
 	public void update_tri_mesh(Mesh msh){
-		msh.triangles = new int[]{};
-		msh.vertices = this.vertices;
-		msh.triangles = this.triangles;
-		msh.colors = this.colors;
-		msh.RecalculateNormals();
-		msh.RecalculateBounds();
-		msh.RecalculateTangents();
+		bool facecolor = this.get_option("color") == "facecolor";
+		if (!facecolor){
+			msh.triangles = new int[]{};
+			msh.vertices = this.vertices;
+			msh.triangles = this.triangles;
+			msh.colors = this.colors;
+			msh.RecalculateNormals();
+			msh.RecalculateBounds();
+			msh.RecalculateTangents();
+		}
+		if(facecolor)
+		{
+			int len_tri = this.triangles.Length;
+			int facenum = 0;
+
+			Vector3[] new_vertices = new Vector3[len_tri];
+			Color[] new_colors = new Color[len_tri];
+			int[] new_triangles = new int[len_tri];
+
+			for (int i = 0; i < len_tri; i++){
+				facenum = i/3;
+				new_vertices[i] = this.vertices[this.triangles[i]];
+				new_colors[i] = this.colors[facenum];
+				new_triangles[i] = i;
+			}
+			msh.vertices = new_vertices;
+			msh.triangles = new_triangles;
+			msh.colors = new_colors;
+		}
 	}
 
 	public Mesh new_line_mesh(GameObject gameObject){
@@ -91,6 +113,17 @@ public class UnityMesh
 		msh.RecalculateBounds();
 	}
 
+	public string get_option(string str){
+
+		for(int i = 0; i < this.options.Length; i++){
+			string[] strArr = this.options[i].Split("="[0]);
+			if (strArr[0].Trim().Equals(str)){
+				return strArr[1].Trim();
+			}
+		}
+		return "not found";
+	}
+
 	public void process_options(GameObject gameObject, string str)
 	{
 		for(int i = 0; i < this.options.Length; i++)
@@ -118,7 +151,7 @@ public class UnityMesh
 		if (option.Equals("smooth")){
 			gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/StandardVertex") );
 		}
-	}
 
+	}
 	
 }

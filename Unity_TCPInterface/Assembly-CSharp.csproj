@@ -51,28 +51,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Pcx\PointCloudData.cs" />
+     <Compile Include="Assets\Pcx\PointCloudRenderer.cs" />
      <Compile Include="Assets\Scripts\DrawGizmoGrid.cs" />
      <Compile Include="Assets\Scripts\DrawGrid.cs" />
      <Compile Include="Assets\Scripts\FlyCamera.cs" />
      <Compile Include="Assets\Scripts\TCPInterface.cs" />
      <Compile Include="Assets\Scripts\UnityMesh.cs" />
      <None Include="Assets\Shaders\My Lighting.cginc" />
-     <None Include="Assets\Shaders\Point.shader" />
      <None Include="Assets\Shaders\WorldSpaceNormals.shader" />
      <None Include="Assets\Shaders\Grid.shader" />
-     <None Include="Assets\Shaders\Disk.shader" />
      <None Include="Assets\Shaders\Custom.shader" />
      <None Include="Assets\Shaders\MyDeferredShading.cginc" />
      <None Include="Assets\Shaders\MyFlatWireframe.cginc" />
+     <None Include="Assets\Pcx\Shaders\Disk.shader" />
+     <None Include="Assets\Pcx\Shaders\Point.shader" />
+     <None Include="Assets\Shaders\ExampleVertexColorShader.shader" />
+     <None Include="Assets\Pcx\Shaders\Disk.cginc" />
      <None Include="Assets\Shaders\StandartVertex.shader" />
-     <None Include="Assets\Shaders\Common.cginc" />
      <None Include="Assets\Shaders\Flat.shader" />
      <None Include="Assets\Shaders\My Lightmapping.cginc" />
      <None Include="Assets\Shaders\My Lighting Input.cginc" />
      <None Include="Assets\Shaders\Flat Wireframe Shader.shader" />
+     <None Include="Assets\Pcx\Shaders\Common.cginc" />
      <None Include="Assets\Shaders\My Shadows.cginc" />
      <None Include="Assets\Shaders\MyFlat.cginc" />
-     <None Include="Assets\Shaders\Disk.cginc" />
      <None Include="Assets\Shaders\SkyReflection.shader" />
  <Reference Include="UnityEngine.UIAutomation">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>

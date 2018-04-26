@@ -11,6 +11,7 @@ line_inds = Int32[0,1,1,2,2,3,3,0]
 vert_inds = Int32[0,1,2,3]
 #define colors
 colors = rand(RGBA{Float32},length(verts))
+colors = [RGBA{Float32}(1,1,1,.001) for vert in verts]
 #define optons
 options = ["surface_shader = flat"]
 
