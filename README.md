@@ -28,17 +28,13 @@ In numeric simulation we operate mostly on mesh-data, so we need easy-to-use but
 This package is in a very early development stage but to my knowledge it should work.
 
 1. *Unity:* Start Unity and load the Unity Project *Unity_TCPInterface*.
-2. *Unity:* Load Scene1
-3. *Julia:* 
+2. *Unity:* Load *Scene1*
+3. *Unity:* Press Play
+4. *Julia:* 
 ```Julia
-import Unity: TcpStream, accept!, write, UnityMesh, Vector3
+import Unity: UnityMesh, PyramidMesh, Vector3
 using ColorTypes
-tcpstream = TcpStream(8052)
-accept!(tcpstream)
-```
-4. *Unity:* Press Play (Now the connection is set up and you can begin to draw. I will make this way more convenient in the next few month)
-5. *Julia:* 
-```Julia
+
 #define vertices
 verts = [Vector3(0,0,0),Vector3(1,0,0),Vector3(1,1,0),Vector3(0,1,0)]
 #define indices for surface mesh
@@ -47,25 +43,24 @@ surf_inds = Int32[0,2,1,0,3,2]
 line_inds = Int32[0,1,1,2,2,3,3,0]
 #define indices for vertex mesh
 vert_inds = Int32[0,1,2,3]
-#define vertex colors
-color = rand(RGBA{Float32},length(verts))
-#define options
+#define colors
+colors = rand(RGBA{Float32},length(verts))
+#define optons
 options = ["surface_shader = flat"]
 
-#create surface mesh
-surface_mesh = UnityMesh("Mesh 1", verts, Int32[], Int32[], surf_inds, color, options)
-#create line mesh
-line_mesh = UnityMesh("Mesh 2", map(x->Vector3(x.x+3,x.y,x.z),verts), Int32[], line_inds, Int32[], color, String[])
-#create point mesh
-point_mesh = UnityMesh("Mesh 3", map(x->Vector3(x.x,x.y+3,x.z),verts), vert_inds, Int32[], Int32[], color, String[])
-#create mesh with surface, lines and vertices
-mesh = UnityMesh("Mesh 4", map(x->Vector3(x.x+3,x.y+3,x.z),verts), vert_inds, line_inds, surf_inds, color, options)
+#create meshes
+surface_mesh = UnityMesh("Mesh 1", verts, Int32[], Int32[], surf_inds, colors, options)
+line_mesh = UnityMesh("Mesh 2", map(x->Vector3(x.x+3,x.y,x.z),verts), Int32[], line_inds, Int32[], colors, String[])
+point_mesh = UnityMesh("Mesh 3", map(x->Vector3(x.x,x.y+3,x.z),verts), vert_inds, Int32[], Int32[], colors, String[])
+mesh = UnityMesh("Mesh 4", map(x->Vector3(x.x+3,x.y+3,x.z),verts), vert_inds, line_inds, surf_inds, colors, options)
 
-#send meshes as stream
-write(tcpstream, surface_mesh)
-write(tcpstream, line_mesh)
-write(tcpstream, point_mesh)
-write(tcpstream, mesh)
+#send meshes to unity
+socket = connect(8052)
+write(socket, surface_mesh)
+write(socket, line_mesh)
+write(socket, point_mesh)
+write(socket, mesh)
+close(socket)
 ```
 You should see something like this:
 ![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")
