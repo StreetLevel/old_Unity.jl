@@ -51,6 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ImageEffects\Scripts\Antialiasing.cs" />
+     <Compile Include="Assets\ImageEffects\Scripts\ImageEffectBase.cs" />
+     <Compile Include="Assets\ImageEffects\Scripts\ImageEffects.cs" />
+     <Compile Include="Assets\ImageEffects\Scripts\PostEffectsBase.cs" />
+     <Compile Include="Assets\ImageEffects\Scripts\PostEffectsHelper.cs" />
      <Compile Include="Assets\Pcx\PointCloudData.cs" />
      <Compile Include="Assets\Pcx\PointCloudRenderer.cs" />
      <Compile Include="Assets\Scripts\DrawGizmoGrid.cs" />
@@ -61,21 +66,37 @@
      <None Include="Assets\Shaders\My Lighting.cginc" />
      <None Include="Assets\Shaders\WorldSpaceNormals.shader" />
      <None Include="Assets\Shaders\Grid.shader" />
+     <None Include="Assets\ImageEffects\Shaders\_Antialiasing\NFAA.shader" />
      <None Include="Assets\Shaders\Custom.shader" />
+     <None Include="Assets\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
      <None Include="Assets\Shaders\MyDeferredShading.cginc" />
+     <None Include="Assets\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\Shaders\MyFlatWireframe.cginc" />
+     <None Include="Assets\Shaders\Circle.shader" />
      <None Include="Assets\Pcx\Shaders\Disk.shader" />
+     <None Include="Assets\Shaders\Grid2.shader" />
+     <None Include="Assets\Shaders\UnlitTest.shader" />
      <None Include="Assets\Pcx\Shaders\Point.shader" />
      <None Include="Assets\Shaders\ExampleVertexColorShader.shader" />
      <None Include="Assets\Pcx\Shaders\Disk.cginc" />
      <None Include="Assets\Shaders\StandartVertex.shader" />
+     <None Include="Assets\Shaders\Cool Hologram.shader" />
+     <None Include="Assets\Shaders\Alpha.shader" />
      <None Include="Assets\Shaders\Flat.shader" />
+     <None Include="Assets\Shaders\Fluid Vertex.shader" />
+     <None Include="Assets\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
+     <None Include="Assets\Shaders\AShader.shader" />
+     <None Include="Assets\Shaders\Vertex Color.shader" />
      <None Include="Assets\Shaders\My Lightmapping.cginc" />
      <None Include="Assets\Shaders\My Lighting Input.cginc" />
      <None Include="Assets\Shaders\Flat Wireframe Shader.shader" />
+     <None Include="Assets\ImageEffects\Shaders\_Antialiasing\FXAA2.shader" />
      <None Include="Assets\Pcx\Shaders\Common.cginc" />
      <None Include="Assets\Shaders\My Shadows.cginc" />
      <None Include="Assets\Shaders\MyFlat.cginc" />
+     <None Include="Assets\Shaders\VertexLit Colored.shader" />
+     <None Include="Assets\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
+     <None Include="Assets\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Shaders\SkyReflection.shader" />
  <Reference Include="UnityEngine.UIAutomation">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>

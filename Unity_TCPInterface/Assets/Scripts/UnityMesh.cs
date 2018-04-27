@@ -55,6 +55,8 @@ public class UnityMesh
 			msh.RecalculateNormals();
 			msh.RecalculateBounds();
 			msh.RecalculateTangents();
+			Debug.Log(msh.colors[0].ToString());
+			Debug.Log(this.colors[0].ToString());
 		}
 		if(facecolor)
 		{
@@ -74,6 +76,9 @@ public class UnityMesh
 			msh.vertices = new_vertices;
 			msh.triangles = new_triangles;
 			msh.colors = new_colors;
+			msh.RecalculateNormals();
+			msh.RecalculateBounds();
+			msh.RecalculateTangents();
 		}
 	}
 
@@ -150,6 +155,9 @@ public class UnityMesh
 		}
 		if (option.Equals("smooth")){
 			gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/StandardVertex") );
+		}
+		if (option.Equals("transparent")){
+			gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/Alpha") );
 		}
 
 	}

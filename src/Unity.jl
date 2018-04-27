@@ -10,6 +10,17 @@ type Vector3
     z::Float32
 end
 
+type CLR
+    r::Float32
+    g::Float32
+    b::Float32
+    a::Float32
+end
+
+function Base.convert(::Type{CLR},c::ColorTypes.RGBA{Float32})
+    return CLR(c.r,c.g,c.b,c.alpha)
+end
+
 #Unity mesh with c-like indexing
 type UnityMesh
     id::String
@@ -17,7 +28,7 @@ type UnityMesh
     points::Vector{Int32}
     lines::Vector{Int32}
     triangles::Vector{Int32}
-    colors::Vector{ColorTypes.RGBA{Float32}}
+    colors::Vector{CLR}
     options::Vector{String}
 end
 

@@ -22,9 +22,9 @@ mayo_color = [rand(RGBA{Float32}) for i = 1:3:length(mayo_triangles)]
 bone_options = ["surface_shader = wireframe"]
 mayo_options = ["surface_shader = wireframe", "color = facecolor"]
 
-unity_bone_mesh = UnityMesh("Bone",bone_vertices,Int32[],bone_lines,bone_triangles,bone_color,options)
-unity_mayo_mesh = UnityMesh("Mayo",mayo_vertices,Int32[],mayo_lines,mayo_triangles,mayo_color,options)
-unity_mayo_mesh = UnityMesh("Mayo",mayo_vertices,Int32[],Int32[],mayo_triangles,mayo_color,options)
+unity_bone_mesh = UnityMesh("Bone",bone_vertices,Int32[],bone_lines,bone_triangles,bone_color,bone_options)
+unity_mayo_mesh = UnityMesh("Mayo",mayo_vertices,Int32[],mayo_lines,mayo_triangles,mayo_color,mayo_options)
+unity_mayo_mesh = UnityMesh("Mayo",mayo_vertices,Int32[],Int32[],mayo_triangles,mayo_color,mayo_options)
 
 socket = connect(8052)
 write(socket,unity_bone_mesh)
