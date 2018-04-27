@@ -86,7 +86,7 @@ You should see something like this:
 * partial transmission of meshes (e.g. only update the vertices or colors)
 * colorbar
 * coordinate axes
-* transparency
+* nicer transparency shader
 * nicer shader for line mesh
 * nicer shader and primitive for point mesh
 * quad meshes
