@@ -58,6 +58,7 @@
      <Compile Include="Assets\ImageEffects\Scripts\PostEffectsHelper.cs" />
      <Compile Include="Assets\Pcx\PointCloudData.cs" />
      <Compile Include="Assets\Pcx\PointCloudRenderer.cs" />
+     <Compile Include="Assets\Scripts\CameraExtensions.cs" />
      <Compile Include="Assets\Scripts\DrawGizmoGrid.cs" />
      <Compile Include="Assets\Scripts\DrawGrid.cs" />
      <Compile Include="Assets\Scripts\FlyCamera.cs" />

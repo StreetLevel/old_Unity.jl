@@ -33,7 +33,7 @@ public class TCPInterface : MonoBehaviour
 				// Start Server
 				tcpListenerThread = new Thread (new ThreadStart(ListenForIncommingRequests)); 		
 				tcpListenerThread.IsBackground = true; 		
-				tcpListenerThread.Start(); 	
+				tcpListenerThread.Start(); 
 		}
 	
 		// Update is called once per frame
