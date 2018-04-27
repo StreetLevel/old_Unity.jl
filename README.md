@@ -32,7 +32,7 @@ This package is in a very early development stage but to my knowledge it should 
 3. *Unity:* Press Play
 4. *Julia:* 
 ```Julia
-import Unity: UnityMesh, PyramidMesh, Vector3
+import Unity: UnityMesh, Vector3
 using ColorTypes
 
 #define vertices
@@ -46,7 +46,7 @@ vert_inds = Int32[0,1,2,3]
 #define colors
 colors = rand(RGBA{Float32},length(verts))
 #define optons
-options = ["surface_shader = flat"]
+options = ["shader = flat"]
 
 #create meshes
 surface_mesh = UnityMesh("Mesh 1", verts, Int32[], Int32[], surf_inds, colors, options)
@@ -90,4 +90,5 @@ You should see something like this:
 * nicer shader for line mesh
 * nicer shader and primitive for point mesh
 * quad meshes
+* point size
 

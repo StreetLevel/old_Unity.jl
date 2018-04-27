@@ -63,6 +63,11 @@
      <Compile Include="Assets\Scripts\FlyCamera.cs" />
      <Compile Include="Assets\Scripts\TCPInterface.cs" />
      <Compile Include="Assets\Scripts\UnityMesh.cs" />
+     <Compile Include="Assets\SimTimeControls\Scripts\PlaySpeedSliderControl.cs" />
+     <Compile Include="Assets\SimTimeControls\Scripts\TimeCtrlToggleGroupEventHandlers.cs" />
+     <Compile Include="Assets\SimTimeControls\Scripts\TimeSlider.cs" />
+     <Compile Include="Assets\SimTimeControls\Scripts\UpdateUIDatetimeText.cs" />
+     <Compile Include="Assets\SimTimeControls\Scripts\UpdateUISimstepText.cs" />
      <None Include="Assets\Shaders\My Lighting.cginc" />
      <None Include="Assets\Shaders\WorldSpaceNormals.shader" />
      <None Include="Assets\Shaders\Grid.shader" />

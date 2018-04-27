@@ -57,6 +57,7 @@
      <Compile Include="Assets\Pcx\Editor\PointCloudDataInspector.cs" />
      <Compile Include="Assets\Pcx\Editor\PointCloudRendererInspector.cs" />
      <Compile Include="Assets\Scripts\Editor\MyLightingShaderGUI.cs" />
+     <Compile Include="Assets\SimTimeControls\Editor\PlaySpeedSliderControlEditor.cs" />
  <Reference Include="UnityEngine.UIAutomation">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
  </Reference>
