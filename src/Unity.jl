@@ -25,9 +25,9 @@ end
 type UnityMesh
     id::String
     vertices::Vector{Vector3}
-    points::Vector{Int32}
-    lines::Vector{Int32}
-    triangles::Vector{Int32}
+    points::Vector{UInt32}
+    lines::Vector{UInt32}
+    triangles::Vector{UInt32}
     colors::Vector{CLR}
     options::Vector{String}
 end
@@ -43,7 +43,7 @@ end
 type PyramidMesh
     id::String
     vertices::Vector{Vector3}
-    pyramids::Vector{Int32}
+    pyramids::Vector{UInt32}
     colors::Vector{ColorTypes.RGBA{Float32}}
 end
 
@@ -59,7 +59,7 @@ end
 end
 
 function Base.convert(::Type{UnityMesh},msh::PyramidMesh,pattern::Vector{Int})
-    triangles = Vector{Int32}()
+    triangles = Vector{UInt32}()
     inds = msh.pyramids
     @assert mod(length(inds),4) == 0
     for i = 1:4:length(inds)
@@ -72,14 +72,14 @@ function Base.convert(::Type{UnityMesh},msh::PyramidMesh,pattern::Vector{Int})
             ]
             )
     end
-    return UnityMesh(msh.id,msh.vertices,Int32[],Int32[],triangles,msh.colors)
+    return UnityMesh(msh.id,msh.vertices,UInt32[],UInt32[],triangles,msh.colors)
 end
 
 function convert_and_duplicate(::Type{UnityMesh},msh::PyramidMesh,pattern::Vector{Int})
     id = msh.id
     verts = msh.vertices
-    lines = Int32[]
-    points = Int32[]
+    lines = UInt32[]
+    points = UInt32[]
     inds = msh.pyramids
     clrs = msh.colors
     @assert mod(length(inds),4) == 0
@@ -100,7 +100,7 @@ function convert_and_duplicate(::Type{UnityMesh},msh::PyramidMesh,pattern::Vecto
 
     end
 
-    triangles = Int32[i-1 for i = 1:length(vertices)]
+    triangles = UInt32[i-1 for i = 1:length(vertices)]
 
     return UnityMesh(id,vertices,points,lines,triangles,colors)
 
@@ -114,7 +114,7 @@ end
 import Combinatorics
 function boundary(upm::PyramidMesh)
     verts = Vector{GeometryTypes.Point3f0}()
-    pyramids = Vector{Int32}()
+    pyramids = Vector{UInt32}()
     clrs = Vector{ColorTypes.RGBA{Float32}}()
     for i = 1:4:length(upm.pyramids)
         # todo

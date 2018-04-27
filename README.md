@@ -67,13 +67,17 @@ You should see something like this:
 
 ## Different shader for surface meshes
 
-| wireframe                        | flat                       | smooth                       |
-| :------------------------------: |:--------------------------:| :---------------------------:|
-| ![img_bone][img_bone_wireframe]  | ![img_bone][img_bone_flat] | ![img_bone][img_bone_smooth] |
+| wireframe                        | flat                         | 
+| :------------------------------: |:----------------------------:| 
+| ![img_bone][img_bone_wireframe]  | ![img_bone][img_bone_flat]   | 
+|smooth                            |transparent                   |
+|:-------------------------------: |:---------------------------: |
+|![img_bone][img_bone_smooth]      |![img_bone][img_bone_transparent]|
 
 [img_bone_wireframe]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_wireframe_shader.png "wireframe shader"
 [img_bone_flat]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_flat_shader.png "flat_shader"
 [img_bone_smooth]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_smooth_shader.png "smooth shader"
+[img_bone_transparent]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_transparent_shader.png "transparent shader"
 
 ## TODO
 

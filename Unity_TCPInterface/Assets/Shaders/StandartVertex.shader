@@ -6,15 +6,15 @@
          _Metallic ("Metallic", Range(0,1)) = 0.0
      }
      SubShader {
-         Tags { "RenderType"="Transparent" }
+         Tags { "RenderType"="Opaque" }
          LOD 200
          
          CGPROGRAM
          #pragma surface surf Standard vertex:vert fullforwardshadows
-         #pragma target 4.0
+         #pragma target 3.0
          struct Input {
              float2 uv_MainTex;
-             float4 vertexColor; // Vertex color stored here by vert() method
+             float3 vertexColor; // Vertex color stored here by vert() method
          };
          
          struct v2f {
@@ -38,11 +38,11 @@
          {
              // Albedo comes from a texture tinted by color
              fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-             o.Albedo =  IN.vertexColor; // Combine normal color with the vertex color
+             o.Albedo = c.rgb * IN.vertexColor; // Combine normal color with the vertex color
              // Metallic and smoothness come from slider variables
              o.Metallic = _Metallic;
              o.Smoothness = _Glossiness;
-             o.Alpha = 255;
+             o.Alpha = c.a;
          }
          ENDCG
      } 

@@ -57,6 +57,7 @@ public class UnityMesh
 			msh.RecalculateTangents();
 			Debug.Log(msh.colors[0].ToString());
 			Debug.Log(this.colors[0].ToString());
+			Debug.Log(this.triangles[0].ToString());
 		}
 		if(facecolor)
 		{
@@ -137,7 +138,7 @@ public class UnityMesh
 			string[] strArr = this.options[i].Split("="[0]);
 			//Debug.Log(strArr[0]);
 			//Debug.Log(strArr[0].Trim().Equals(str+"_shader"));
-			if (strArr[0].Trim().Equals(str+"_shader")){
+			if (strArr[0].Trim().Equals("shader")){
 				//Debug.Log(strArr[1].Trim());
 				set_shader_options(gameObject,strArr[1].Trim());
 			}

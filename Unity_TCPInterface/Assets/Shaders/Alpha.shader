@@ -10,17 +10,19 @@
          //_Scroll2Y ("2nd layer Scroll speed Y", Float) = 0.0
          _Intensity ("Intensity", Float) = 0.5
          _Alpha ("Alpha", Range(0.0, 1.0)) = .1
+        _Glossiness ("Smoothness", Range(0,1)) = 0.5
+        _Metallic ("Metallic", Range(0,1)) = 0.0
      }
      
      SubShader {
          Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
          
-         Lighting Off 
+         Lighting On 
          Fog { Mode Off }
          ZWrite Off
          Blend SrcAlpha OneMinusSrcAlpha
 
-         LOD 100
+         LOD 200
          
              
          CGINCLUDE
@@ -38,6 +40,8 @@
          //float _Scroll2Y;
          float _Intensity;
          float _Alpha;
+        half _Glossiness;
+         half _Metallic;
          
          struct v2f {
              float4 pos : SV_POSITION;
@@ -58,7 +62,7 @@
              return o;
          }
          ENDCG
-     
+        
      
          Pass {
              CGPROGRAM

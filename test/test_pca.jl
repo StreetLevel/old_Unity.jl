@@ -1,55 +1,10 @@
-function [VerT,eigVecs,eigVals,exp,wCentroid] = PCA_Weighted(Vertices ,Faces)
- 
-% PCA_Weighted: Perform WEIGHTED PCA on triangular mesh using the weighted
-% covariance matrix and the eigenvalue decomposition algorithm. This allows to
-% detect the principal axis of a 3D triangular mesh independently of the triangular
-% discretization, i.e. regions with lots of small triangles will not skew the results
-%
-% Inputs:
-%         Vertices [nx3], each row contains one vertice  x,y z coordinates
-%         Faces [mx3], each row made of 3 vertices indexes
-%
-%Outputs:
-%
-%     VertT:  Transformed Vertices centred and rotated, also known as 'Scores'
-%
-%     eigVecs: eigenvectors of the weighted covariance matrix, can be viewed as a
-%                  coordinate system or rotation matrix
-%
-%     eigVals: eigenvalues, also known as 'latent correspond to the variance
-%                 explained by each principal component.
-%
-%     exp: percentage of the total variance explained by each principal component
-%
-%     wCentroid: weighted centroid of mesh, equal to the weighted sample mean
-%                     using areas of triangles as weights
-%
-% Usage:
-%            [VerT,eigVecs,eigVals,exp,wCentroid] = PCA_Weighted(Vertices ,Faces)
-%            [VerT,~,~,~,~] = PCA_Weighted(Vertices ,Faces)
-%            use ~ to omit a particulare output
+function pca_weighted(mesh)
 
-% Last amended::        Germano Gomes 1/06/2014.
-% Created:                  Germano Gomes 2012
- 
- 
-% check number of input arguments (minimum 2, maximum 2)
 
-narginchk(2,2);
- 
-% check number of output arguments (minimum 1, maximum 5)
 
-nargoutchk(1,5);
- 
-% verify that input matrices are have 3 columns and at least 2 rows
-
-[nvert,ncol1] = size(Vertices); [nface, ncol2] = size(Faces);
-if nvert  < 2 || ncol1 ~= 3 ||  nface  < 2 || ncol2 ~= 3
-    error ('The input data matrices (Vertices and Faces) must have exactly three columns and at least 2 rows')
-end
- 
-% compute the centroid for each face/triangle, store in (FacesC)
-
+Faces = map(x->x[4:end],filter(x->x[1:3]==[2,3,1],mesh.elements))
+Vertices = mayo_vertices = [ [ mesh.nodes[1,i], mesh.nodes[2,i], mesh.nodes[3,i] ] for i = 1:size(mayo_mesh.nodes,2) ]
+# compute the centroid for each face/triangle, store in (FacesC)
 nface=length(Faces);
 FacesC = [   ...
     sum(reshape(Vertices(Faces,1),[nface 3]), 2)/3, ...
