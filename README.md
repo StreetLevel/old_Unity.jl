@@ -62,9 +62,8 @@ write(socket, point_mesh)
 write(socket, mesh)
 close(socket)
 ```
-| You should see something like this:  |
-| :------------------------------: |
-|![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")|
+You should see something like this:
+<span style="text-align:center">![Unity Mesh](https://github.com/StreetLevel/Unity.jl/blob/master/images/meshes01.png "meshes01.png")</span>
 
 ## Different shader for surface meshes
 
