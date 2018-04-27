@@ -71,7 +71,6 @@ You should see something like this:
 | :------------------------------: |:----------------------------:| 
 | ![img_bone][img_bone_wireframe]  | ![img_bone][img_bone_flat]   | 
 |smooth                            |transparent                   |
-|:-------------------------------: |:---------------------------: |
 |![img_bone][img_bone_smooth]      |![img_bone][img_bone_transparent]|
 
 [img_bone_wireframe]: https://github.com/StreetLevel/Unity.jl/blob/master/images/bone_wireframe_shader.png "wireframe shader"
