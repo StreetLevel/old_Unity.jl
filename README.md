@@ -32,11 +32,11 @@ This package is in a very early development stage but to my knowledge it should 
 3. *Unity:* Press Play
 4. *Julia:* 
 ```Julia
-import Unity: UnityMesh, Vector3
+import Unity: UnityMesh, UnityVector3
 using ColorTypes
 
 #define vertices
-verts = [Vector3(0,0,0),Vector3(1,0,0),Vector3(1,1,0),Vector3(0,1,0)]
+verts = [UnityVector3(0,0,0),UnityVector3(1,0,0),UnityVector3(1,1,0),UnityVector3(0,1,0)]
 #define indices for surface mesh
 surf_inds = Int32[0,2,1,0,3,2]
 #define indices for line mesh
@@ -50,9 +50,9 @@ options = ["shader = flat"]
 
 #create meshes
 surface_mesh = UnityMesh("Mesh 1", verts, Int32[], Int32[], surf_inds, colors, options)
-line_mesh = UnityMesh("Mesh 2", map(x->Vector3(x.x+3,x.y,x.z),verts), Int32[], line_inds, Int32[], colors, String[])
-point_mesh = UnityMesh("Mesh 3", map(x->Vector3(x.x,x.y+3,x.z),verts), vert_inds, Int32[], Int32[], colors, String[])
-mesh = UnityMesh("Mesh 4", map(x->Vector3(x.x+3,x.y+3,x.z),verts), vert_inds, line_inds, surf_inds, colors, options)
+line_mesh = UnityMesh("Mesh 2", map(x->UnityVector3(x.x+3,x.y,x.z),verts), Int32[], line_inds, Int32[], colors, String[])
+point_mesh = UnityMesh("Mesh 3", map(x->UnityVector3(x.x,x.y+3,x.z),verts), vert_inds, Int32[], Int32[], colors, String[])
+mesh = UnityMesh("Mesh 4", map(x->UnityVector3(x.x+3,x.y+3,x.z),verts), vert_inds, line_inds, surf_inds, colors, options)
 
 #send meshes to unity
 socket = connect(8052)

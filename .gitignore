@@ -1,9 +1,14 @@
+*.csproj
+*.meta
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
 *.sublime-workspace
 test/test_gmsh.jl
 models/**
+Unity_TCPInterface/Library/**
+Unity_TCPInterface/obj/**
+Unity_TCPInterface/Temp/**
 src/AnsysReader.jl
 src/MeshReaders.jl
 src/PatranReader.jl

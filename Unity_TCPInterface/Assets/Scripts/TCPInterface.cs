@@ -34,6 +34,7 @@ public class TCPInterface : MonoBehaviour
 				tcpListenerThread = new Thread (new ThreadStart(ListenForIncommingRequests)); 		
 				tcpListenerThread.IsBackground = true; 		
 				tcpListenerThread.Start(); 
+
 		}
 	
 		// Update is called once per frame
@@ -43,25 +44,25 @@ public class TCPInterface : MonoBehaviour
 				while (meshqueue.Count > 0) {
 					
 					UnityMesh rec_msh = meshqueue.Dequeue();
+					GameObject ago = null;
 
 						if (rec_msh.triangles.Length > 2) {
 								//triangle mesh
-
 								string id_tri_msh = rec_msh.id + id_tri;
-								//Debug.Log(rec_msh.options["shader"]);
+								
 								if (meshdict.ContainsKey (id_tri_msh)) {
-										//update mesh
-										//Debug.Log("Update Mesh "+id_tri_msh);
+										
 										Mesh msh = meshdict [id_tri_msh];
 										rec_msh.update_tri_mesh (msh);
+										ago = godict [id_tri_msh];
 
 								} else {
-										//new mesh
-										//Debug.Log("New Mesh "+id_tri_msh);
-										GameObject go = new GameObject (id_tri_msh);
-										godict [id_tri_msh] = go;
-										Mesh msh = rec_msh.new_tri_mesh (go);
+										
+										ago = new GameObject (id_tri_msh);
+										godict [id_tri_msh] = ago;
+										Mesh msh = rec_msh.new_tri_mesh (ago);
 										meshdict [id_tri_msh] = msh;
+										
 								}
 
 								rec_msh.process_options(godict [id_tri_msh], "surface");
@@ -74,11 +75,12 @@ public class TCPInterface : MonoBehaviour
 										//update mesh
 										Mesh msh = meshdict [id_line_msh];
 										rec_msh.update_line_mesh (msh);
+										ago = godict [id_line_msh];
 								} else {
 										//new mesh
-										GameObject go = new GameObject (id_line_msh);
-										godict [id_line_msh] = go;
-										Mesh msh = rec_msh.new_line_mesh (go);
+										ago = new GameObject (id_line_msh);
+										godict [id_line_msh] = ago;
+										Mesh msh = rec_msh.new_line_mesh (ago);
 										meshdict [id_line_msh] = msh;
 								}
 
@@ -92,23 +94,26 @@ public class TCPInterface : MonoBehaviour
 										//update mesh
 										Mesh msh = meshdict [id_vert_msh];
 										rec_msh.update_vert_mesh (msh);
+										ago = godict [id_vert_msh];
 								} else {
 										//new mesh
-										GameObject go = new GameObject (id_vert_msh);
-										godict [id_vert_msh] = go;
-										Mesh msh = rec_msh.new_vert_mesh (go);
+										ago = new GameObject (id_vert_msh);
+										godict [id_vert_msh] = ago;
+										Mesh msh = rec_msh.new_vert_mesh (ago);
 										meshdict [id_vert_msh] = msh;
 								}
 
 								rec_msh.process_options(godict [id_vert_msh], "point");
 						}
 
-						//rec_msh = null;
+						if (ago!=null){
+							rec_msh.draw_text(ago);
+						}
+						ago = null;
+						rec_msh = null;
+						
 				}
-		
-				/*if (Input.GetKeyDown(KeyCode.Space)) {             
-			SendMessage();         
-		}*/   
+		 
 		}
 
 		private void ListenForIncommingRequests () { 		

@@ -12,27 +12,27 @@ public class UnityMesh
 	public int[] triangles;
 	public Color[] colors;
 	public string[] options;
-	//public StringStringDictionary stringIntegerStore;
+	public UnityText[] text;
     
 
 	public UnityMesh(){
 	}
 
-	public UnityMesh (Vector3[] vertices, int[] triangles,Color[] colors)
-	{
-		this.id = "-1";
-		this.vertices = vertices;
-		this.triangles = triangles;
-		this.colors = colors;
-	}
-
-	public UnityMesh (string id, Vector3[] vertices, int[] triangles,Color[] colors)
-	{
-		this.id = id;
-		this.vertices = vertices;
-		this.triangles = triangles;
-		this.colors = colors;
-	}
+	//public UnityMesh (Vector3[] vertices, int[] triangles,Color[] colors)
+	//{
+	//	this.id = "-1";
+	//	this.vertices = vertices;
+	//	this.triangles = triangles;
+	//	this.colors = colors;
+	//}
+//
+	//public UnityMesh (string id, Vector3[] vertices, int[] triangles,Color[] colors)
+	//{
+	//	this.id = id;
+	//	this.vertices = vertices;
+	//	this.triangles = triangles;
+	//	this.colors = colors;
+	//}
 
 	public Mesh new_tri_mesh(GameObject gameObject){
 		Mesh msh = new Mesh();
@@ -55,9 +55,6 @@ public class UnityMesh
 			msh.RecalculateNormals();
 			msh.RecalculateBounds();
 			msh.RecalculateTangents();
-			Debug.Log(msh.colors[0].ToString());
-			Debug.Log(this.colors[0].ToString());
-			Debug.Log(this.triangles[0].ToString());
 		}
 		if(facecolor)
 		{
@@ -134,20 +131,23 @@ public class UnityMesh
 	{
 		for(int i = 0; i < this.options.Length; i++)
 		{	
-			//Debug.Log(this.options[i]);
+			
 			string[] strArr = this.options[i].Split("="[0]);
-			//Debug.Log(strArr[0]);
-			//Debug.Log(strArr[0].Trim().Equals(str+"_shader"));
+
 			if (strArr[0].Trim().Equals(str+"_shader")){
 				//Debug.Log(strArr[1].Trim());
-				set_shader_options(gameObject,strArr[1].Trim());
+				set_surface_shader_options(gameObject,strArr[1].Trim());
+			}
+			if (strArr[0].Trim().Equals(str+"_size")){
+				//Debug.Log(strArr[1].Trim());
+				set_point_shader_size(gameObject, float.Parse( strArr[1].Trim() ) );
 			}
 
 		}
 
 	}
 
-	public void set_shader_options(GameObject gameObject, string option){
+	public void set_surface_shader_options(GameObject gameObject, string option){
 		if (option.Equals("wireframe")){
 			gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/Flat Wireframe") );
 		}
@@ -162,5 +162,25 @@ public class UnityMesh
 		}
 
 	}
+
+	public void set_point_shader_size(GameObject gameObject, float size){
+		gameObject.GetComponent<Renderer>().material.SetFloat("_PointSize", size);
+	}
+
+	public void draw_text(GameObject parent){
+		foreach (Transform child in parent.transform) GameObject.Destroy(child.gameObject);
+		for (int i = 0; i < this.text.Length; i++) draw_text(parent, this.text[i], i);
+	}
+
+	public void draw_text(GameObject parent, UnityText text, int i){
+		GameObject textobject = new GameObject ("Text "+ i.ToString());
+		TextMesh t = textobject.AddComponent<TextMesh>();
+		t.text = text.text;
+ 		t.fontSize = 20;
+ 		t.transform.localEulerAngles = text.rot;
+ 		t.transform.position = text.pos;
+ 		t.transform.localScale = text.scale;
+ 		t.transform.parent = parent.transform;
+	}	
 	
 }

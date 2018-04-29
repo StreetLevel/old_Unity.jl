@@ -4,33 +4,46 @@ import ColorTypes
 import Base.TCPServer
 import GeometryTypes
 
-type Vector3
+type UnityVector3
     x::Float32
     y::Float32
     z::Float32
 end
 
-type CLR
+type UnityColor
     r::Float32
     g::Float32
     b::Float32
     a::Float32
 end
 
-function Base.convert(::Type{CLR},c::ColorTypes.RGBA{Float32})
-    return CLR(c.r,c.g,c.b,c.alpha)
+type UnityText
+    text::String
+    pos::UnityVector3
+    scale::UnityVector3
+    rot::UnityVector3
+end
+
+function Base.convert(::Type{UnityColor},c::ColorTypes.RGBA{Float32})
+    return UnityColor(c.r,c.g,c.b,c.alpha)
 end
 
 #Unity mesh with c-like indexing
 type UnityMesh
     id::String
-    vertices::Vector{Vector3}
+    vertices::Vector{UnityVector3}
     points::Vector{UInt32}
     lines::Vector{UInt32}
     triangles::Vector{UInt32}
-    colors::Vector{CLR}
+    colors::Vector{UnityColor}
     options::Vector{String}
+    text::Vector{UnityText}
 end
+
+function UnityMesh(id::String, vertices::Vector, points::Vector,  lines::Vector, triangles::Vector, colors::Vector, options::Vector)
+    return UnityMesh(id,vertices,points,lines,triangles,colors,options,UnityText[])
+end
+
 
 function Base.write(socket::TCPSocket, um::UnityMesh)
     jum = JSON.json(um)
@@ -42,13 +55,13 @@ end
 #Unity Pyramid mesh with c-like indices
 type PyramidMesh
     id::String
-    vertices::Vector{Vector3}
+    vertices::Vector{UnityVector3}
     pyramids::Vector{UInt32}
     colors::Vector{ColorTypes.RGBA{Float32}}
 end
 
 begin
-local const pattern = [ 0,2,1,0,3,2,2,3,1,0,1,3]
+local const pattern = [ 0,2,1,0,3,2,2,3,1,0,1,3 ]
 function Base.convert(::Type{UnityMesh},msh::PyramidMesh,dublic_vert::Bool=false)
     if dublic_vert
         return convert_and_duplicate(UnityMesh,msh,pattern)
@@ -86,7 +99,7 @@ function convert_and_duplicate(::Type{UnityMesh},msh::PyramidMesh,pattern::Vecto
 
     #new mesh
     #triangles = Vector{Int32}()
-    vertices = Vector{Vector3}()
+    vertices = Vector{UnityVector3}()
     colors = Vector{ColorTypes.RGBA{Float32}}()
 
     for i = 1:4:length(inds)
@@ -112,6 +125,7 @@ function Base.write(tcpstream::TCPSocket, um::PyramidMesh)
 end
 
 import Combinatorics
+
 function boundary(upm::PyramidMesh)
     verts = Vector{GeometryTypes.Point3f0}()
     pyramids = Vector{UInt32}()
@@ -120,4 +134,5 @@ function boundary(upm::PyramidMesh)
         # todo
     end
 end
+
 end #module Unity
