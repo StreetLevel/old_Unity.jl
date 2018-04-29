@@ -27,6 +27,10 @@ end
 function Base.convert(::Type{UnityColor},c::ColorTypes.RGBA{Float32})
     return UnityColor(c.r,c.g,c.b,c.alpha)
 end
+function Base.convert(::Type{UnityVector3},x::GeometryTypes.Point3f0)
+    return UnityVector3(x[1],x[2],x[3])
+end
+
 
 #Unity mesh with c-like indexing
 type UnityMesh
