@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 1480811924}
   - component: {fileID: 1480811923}
   - component: {fileID: 1480811928}
+  - component: {fileID: 1480811929}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -325,7 +326,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1480811922}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d23c743f6e6d249f381abac5e56ea2ce, type: 3}
   m_Name: 
@@ -419,6 +420,23 @@ MonoBehaviour:
   shaderFXAAPreset3: {fileID: 4800000, guid: c182fa94a5a0a4c02870641efcd38cd5, type: 3}
   shaderFXAAII: {fileID: 4800000, guid: cd5b323dcc592457790ff18b528f5e67, type: 3}
   shaderFXAAIII: {fileID: 4800000, guid: c547503fff0e8482ea5793727057041c, type: 3}
+--- !u!114 &1480811929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1480811922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6f3ba22fa6564a83a4a64ac3afd54e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainSpeed: 1
+  shiftAdd: 25
+  maxShift: 1000
+  camSens: 0.25
+  rotateOnlyIfMousedown: 1
+  movementStaysFlat: 1
 --- !u!1 &1536844156
 GameObject:
   m_ObjectHideFlags: 0
