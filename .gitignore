@@ -1,5 +1,7 @@
 *.csproj
+*.sln
 *.meta
+*.shader.meta
 *.jl.cov
 *.jl.*.cov
 *.jl.mem

@@ -31,7 +31,6 @@ function Base.convert(::Type{UnityVector3},x::GeometryTypes.Point3f0)
     return UnityVector3(x[1],x[2],x[3])
 end
 
-
 #Unity mesh with c-like indexing
 type UnityMesh
     id::String
@@ -55,6 +54,7 @@ function Base.write(socket::TCPSocket, um::UnityMesh)
     sleep(.1)
     return retval
 end
+
 
 #Unity Pyramid mesh with c-like indices
 type PyramidMesh

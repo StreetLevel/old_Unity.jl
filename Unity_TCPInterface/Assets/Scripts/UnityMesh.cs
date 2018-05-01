@@ -18,22 +18,6 @@ public class UnityMesh
 	public UnityMesh(){
 	}
 
-	//public UnityMesh (Vector3[] vertices, int[] triangles,Color[] colors)
-	//{
-	//	this.id = "-1";
-	//	this.vertices = vertices;
-	//	this.triangles = triangles;
-	//	this.colors = colors;
-	//}
-//
-	//public UnityMesh (string id, Vector3[] vertices, int[] triangles,Color[] colors)
-	//{
-	//	this.id = id;
-	//	this.vertices = vertices;
-	//	this.triangles = triangles;
-	//	this.colors = colors;
-	//}
-
 	public Mesh new_tri_mesh(GameObject gameObject){
 		Mesh msh = new Mesh();
 		this.update_tri_mesh (msh);
