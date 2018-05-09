@@ -30,6 +30,10 @@ end
 function Base.convert(::Type{UnityVector3},x::GeometryTypes.Point3f0)
     return UnityVector3(x[1],x[2],x[3])
 end
+#function Base.convert(::Vector{UInt32},x::Array{GeometryTypes.Face{3,Int32},1})
+#    vcat(map(xx->convert(Vector{UInt32},xx-1),x)...)
+#end
+
 
 #Unity mesh with c-like indexing
 type UnityMesh

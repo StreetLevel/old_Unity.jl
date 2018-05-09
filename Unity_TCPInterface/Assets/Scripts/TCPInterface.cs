@@ -45,72 +45,87 @@ public class TCPInterface : MonoBehaviour
 					
 					UnityMesh rec_msh = meshqueue.Dequeue();
 					GameObject ago = null;
+					GameObject parent = null;
 
-						if (rec_msh.triangles.Length > 2) {
-								//triangle mesh
-								string id_tri_msh = rec_msh.id + id_tri;
-								
-								if (meshdict.ContainsKey (id_tri_msh)) {
-										
-										Mesh msh = meshdict [id_tri_msh];
-										rec_msh.update_tri_mesh (msh);
-										ago = godict [id_tri_msh];
+					if (godict.ContainsKey (rec_msh.id))
+					{
+						parent = godict[rec_msh.id];
+					}
+					else
+					{
+						parent = new GameObject (rec_msh.id);
+						godict[rec_msh.id] = parent;
+					}
 
-								} else {
-										
-										ago = new GameObject (id_tri_msh);
-										godict [id_tri_msh] = ago;
-										Mesh msh = rec_msh.new_tri_mesh (ago);
-										meshdict [id_tri_msh] = msh;
-										
-								}
+					if (rec_msh.triangles.Length > 2) {
+							//triangle mesh
+							string id_tri_msh = rec_msh.id + id_tri;
+							
+							if (meshdict.ContainsKey (id_tri_msh)) {
+									
+									Mesh msh = meshdict [id_tri_msh];
+									rec_msh.update_tri_mesh (msh);
+									ago = godict [id_tri_msh];
 
-								rec_msh.process_options(godict [id_tri_msh], "surface");
-						}
+							} else {
+									
+									ago = new GameObject (id_tri_msh);
+									//ago.transform.parent = parent.transform;
+									godict [id_tri_msh] = ago;
+									Mesh msh = rec_msh.new_tri_mesh (ago,parent);
+									meshdict [id_tri_msh] = msh;
+									
+							}
+							rec_msh.process_options(godict [id_tri_msh], "surface");
+					}
+					if (rec_msh.lines.Length > 1) {
+							//line mesh
+							string id_line_msh = rec_msh.id + id_line;
+							if (meshdict.ContainsKey (id_line_msh)) {
+									
+									//update mesh
+									Mesh msh = meshdict [id_line_msh];
+									rec_msh.update_line_mesh (msh);
+									ago = godict [id_line_msh];
 
-						if (rec_msh.lines.Length > 1) {
-								//line mesh
-								string id_line_msh = rec_msh.id + id_line;
-								if (meshdict.ContainsKey (id_line_msh)) {
-										//update mesh
-										Mesh msh = meshdict [id_line_msh];
-										rec_msh.update_line_mesh (msh);
-										ago = godict [id_line_msh];
-								} else {
-										//new mesh
-										ago = new GameObject (id_line_msh);
-										godict [id_line_msh] = ago;
-										Mesh msh = rec_msh.new_line_mesh (ago);
-										meshdict [id_line_msh] = msh;
-								}
+							} else {
+									
+									//new mesh
+									ago = new GameObject (id_line_msh);
+									//ago.transform.parent = parent.transform;
+									godict [id_line_msh] = ago;
+									Mesh msh = rec_msh.new_line_mesh (ago);
+									meshdict [id_line_msh] = msh;
 
-								rec_msh.process_options(godict [id_line_msh], "line");
-						}
+							}
+							rec_msh.process_options(godict [id_line_msh], "line");
+					}
+					if (rec_msh.points.Length > 0) {
+							//vertex mesh
+							string id_vert_msh = rec_msh.id + id_vert;
+							if (meshdict.ContainsKey (id_vert_msh)) {
+									
+									//update mesh
+									Mesh msh = meshdict [id_vert_msh];
+									rec_msh.update_vert_mesh (msh);
+									ago = godict [id_vert_msh];
 
-						if (rec_msh.points.Length > 0) {
-								//vertex mesh
-								string id_vert_msh = rec_msh.id + id_vert;
-								if (meshdict.ContainsKey (id_vert_msh)) {
-										//update mesh
-										Mesh msh = meshdict [id_vert_msh];
-										rec_msh.update_vert_mesh (msh);
-										ago = godict [id_vert_msh];
-								} else {
-										//new mesh
-										ago = new GameObject (id_vert_msh);
-										godict [id_vert_msh] = ago;
-										Mesh msh = rec_msh.new_vert_mesh (ago);
-										meshdict [id_vert_msh] = msh;
-								}
-
-								rec_msh.process_options(godict [id_vert_msh], "point");
-						}
-
-						if (ago!=null){
-							rec_msh.draw_text(ago);
-						}
-						ago = null;
-						rec_msh = null;
+							} else {
+									
+									//new mesh
+									ago = new GameObject (id_vert_msh);
+									godict [id_vert_msh] = ago;
+									Mesh msh = rec_msh.new_vert_mesh (ago);
+									meshdict [id_vert_msh] = msh;
+									//ago.transform.parent = parent.transform;
+							}
+							rec_msh.process_options(godict [id_vert_msh], "point");
+					}
+					if (ago!=null){
+						rec_msh.draw_text(parent);
+					}
+					ago = null;
+					rec_msh = null;
 						
 				}
 		 
@@ -122,7 +137,8 @@ public class TCPInterface : MonoBehaviour
 			tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8052); 			
 			tcpListener.Start();              
 			Debug.Log("Server is listening");              
-			Byte[] bytes = new Byte[1024];  
+			//Byte[] bytes = new Byte[1024];  
+			Byte[] bytes = new Byte[64000];
 			StringBuilder sb = new StringBuilder ();			
 			while (true) { 				
 				using (connectedTcpClient = tcpListener.AcceptTcpClient()) { 					

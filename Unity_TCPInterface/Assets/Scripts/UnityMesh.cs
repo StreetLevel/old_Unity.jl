@@ -18,14 +18,19 @@ public class UnityMesh
 	public UnityMesh(){
 	}
 
-	public Mesh new_tri_mesh(GameObject gameObject){
+	public Mesh new_tri_mesh(GameObject gameObject, GameObject parent){
+
 		Mesh msh = new Mesh();
 		this.update_tri_mesh (msh);
 		// Set up game object with mesh;
 		gameObject.AddComponent(typeof(MeshRenderer));
 		MeshFilter filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
+		//filter.transform.parent = parent.transform;
+
 		filter.mesh = msh;
 		gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/Flat Wireframe") );
+
+
 		return msh;
 	}
 		
@@ -65,6 +70,7 @@ public class UnityMesh
 	}
 
 	public Mesh new_line_mesh(GameObject gameObject){
+		//Debug.Log(this.id);
 		Mesh msh = new Mesh();
 		this.update_line_mesh (msh);
 		// Set up game object with mesh;
