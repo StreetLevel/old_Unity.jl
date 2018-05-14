@@ -1,8 +1,14 @@
 module Unity
 import JSON
 import ColorTypes
+import ColorTypes: RGB, RGBA
+import Colors: weighted_color_mean
 import Base.TCPServer
 import GeometryTypes
+import GeometryTypes: SimpleRectangle, Point3f0, Face
+
+include(joinpath("palette.jl"))
+include(joinpath("colormaps.jl"))
 
 type UnityVector3
     x::Float32
@@ -142,5 +148,64 @@ function boundary(upm::PyramidMesh)
         # todo
     end
 end
+
+
+function ColorBar(clrmap::BoundedColorMap)
+    
+    add_verts_faces_color!(vertices,faces,lines,colors,a,b,c,d,ca,cb,flip) = begin
+        push!(vertices,a) #0
+        push!(vertices,b) #1
+        push!(vertices,c) #2
+        push!(vertices,d) #3
+        push!(colors,ca)
+        push!(colors,cb)
+        push!(colors,ca)
+        push!(colors,cb)
+        flip ? push!(faces,Face{3,UInt32}(length(vertices)-4,length(vertices)-1,length(vertices)-2)) : push!(faces,Face{3,UInt32}(length(vertices)-1,length(vertices)-4,length(vertices)-2))
+        flip ? push!(faces,Face{3,UInt32}(length(vertices)-4,length(vertices)-3,length(vertices)-1)) : push!(faces,Face{3,UInt32}(length(vertices)-3,length(vertices)-4,length(vertices)-1))
+        push!(lines,length(vertices)-4)
+        push!(lines,length(vertices)-2)
+        push!(lines,length(vertices)-3)
+        push!(lines,length(vertices)-1)
+    end
+    
+    offset = 0.
+    n = 10
+    
+    rel = 10.
+    sr = SimpleRectangle(0.,0.,rel,.5)
+    
+    a = map(Point3f0,convert(Vector{Float64},linspace(0,sr.w,n)),repmat([offset+sr.h],n),repmat([0],n))
+    b = map(Point3f0,convert(Vector{Float64},linspace(0,sr.w,n)),repmat([offset],n),repmat([0],n))
+
+    vals = linspace(clrmap.mindta.value, clrmap.maxdta.value, n )
+    clrmap = apply(clrmap.clrmap, convert( Vector{Float32}, vals ) )
+    
+
+    faces = Face{3,UInt32}[]
+    lines = UInt32[]
+    vertices = Point3f0[]
+    colors = Vector{RGBA{Float32}}()
+
+    for i = 1:n-1
+      add_verts_faces_color!(vertices,faces,lines,colors,a[i],a[i+1],b[i],b[i+1],clrmap[i],clrmap[i+1],false)
+    end
+
+    return vertices,faces,lines,colors,vals,b
+end
+
+function ColorBar(Id::String,clrmap::BoundedColorMap, alpha=0.4)
+
+    vertices,faces,lines,colors,vals,b = ColorBar(clrmap)
+    unity_vertices = map(x->UnityVector3(x[1]-8000,x[2]-8000,x[3]-105), vertices )
+    unity_faces = vcat([[UInt32(x[1]),UInt32(x[2]),UInt32(x[3])] for x in faces]...)
+    unity_colors = map(x->RGBA{Float32}(x.r,x.g,x.b,alpha),colors)
+    text = map((x,y)->UnityText(@sprintf("%.3e",x),y-GeometryTypes.Point3f0(7999.6,8000.1,105),UnityVector3(.1,.1,.05),UnityVector3(1,180,1)), vals,b)
+    #plot(ub,Id,unity_vertices,unity_faces,lines,unity_colors,ub.config[:wireframe_options],text)
+    return UnityMesh(Id,unity_vertices,Int32[],Int32[],unity_faces,unity_colors,["surface_shader = transparent"],text)
+
+end
+
+
 
 end #module Unity
