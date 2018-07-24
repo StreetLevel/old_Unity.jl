@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using UnityEditor;
   
 
 public class TCPInterface : MonoBehaviour
@@ -21,11 +22,11 @@ public class TCPInterface : MonoBehaviour
 		private static string id_tri = " Surface";
 		private static string id_line = " Line";
 		private static string id_vert = " Point";
+		
 	
 		// Use this for initialization
 		void Start ()
 		{
-
 				meshdict = new Dictionary<string,Mesh> ();
 				godict = new Dictionary<string,GameObject> ();
 				meshqueue = new Queue<UnityMesh> ();
@@ -53,7 +54,11 @@ public class TCPInterface : MonoBehaviour
 					}
 					else
 					{
-						parent = new GameObject (rec_msh.id);
+
+						parent = new GameObject();
+						//parent = GameObject.CreatePrimitive(PrimitiveType.Cube);
+						//parent =  Instantiate (prefab, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+        				parent.name = rec_msh.id;
 						godict[rec_msh.id] = parent;
 					}
 
@@ -61,7 +66,7 @@ public class TCPInterface : MonoBehaviour
 							//triangle mesh
 							string id_tri_msh = rec_msh.id + id_tri;
 							
-							if (meshdict.ContainsKey (id_tri_msh)) {
+							if (meshdict.ContainsKey (id_tri_msh) && godict.ContainsKey (id_tri_msh)) {
 									
 									Mesh msh = meshdict [id_tri_msh];
 									rec_msh.update_tri_mesh (msh);
@@ -70,10 +75,16 @@ public class TCPInterface : MonoBehaviour
 							} else {
 									
 									ago = new GameObject (id_tri_msh);
-									//ago.transform.parent = parent.transform;
+									//ago.transform.SetParent(parent.transform);
 									godict [id_tri_msh] = ago;
 									Mesh msh = rec_msh.new_tri_mesh (ago,parent);
 									meshdict [id_tri_msh] = msh;
+									//EditorGUIUtility.PingObject(ago);
+									//Selection.activeGameObject = ago;
+									//ago.transform.SetParent(parent.transform, false);
+
+									ago.transform.parent = parent.transform;
+
 									
 							}
 							rec_msh.process_options(godict [id_tri_msh], "surface");
@@ -81,21 +92,24 @@ public class TCPInterface : MonoBehaviour
 					if (rec_msh.lines.Length > 1) {
 							//line mesh
 							string id_line_msh = rec_msh.id + id_line;
-							if (meshdict.ContainsKey (id_line_msh)) {
+							if (meshdict.ContainsKey (id_line_msh) && godict.ContainsKey (id_line_msh)) {
 									
 									//update mesh
 									Mesh msh = meshdict [id_line_msh];
 									rec_msh.update_line_mesh (msh);
-									ago = godict [id_line_msh];
+									ago = godict [id_line_msh]; //?
 
 							} else {
 									
 									//new mesh
 									ago = new GameObject (id_line_msh);
+									//ago.transform.SetParent(parent.transform);
 									//ago.transform.parent = parent.transform;
 									godict [id_line_msh] = ago;
 									Mesh msh = rec_msh.new_line_mesh (ago);
 									meshdict [id_line_msh] = msh;
+									ago.transform.parent = parent.transform;
+
 
 							}
 							rec_msh.process_options(godict [id_line_msh], "line");
@@ -103,7 +117,7 @@ public class TCPInterface : MonoBehaviour
 					if (rec_msh.points.Length > 0) {
 							//vertex mesh
 							string id_vert_msh = rec_msh.id + id_vert;
-							if (meshdict.ContainsKey (id_vert_msh)) {
+							if (meshdict.ContainsKey (id_vert_msh) && godict.ContainsKey (id_vert_msh)) {
 									
 									//update mesh
 									Mesh msh = meshdict [id_vert_msh];
@@ -115,9 +129,10 @@ public class TCPInterface : MonoBehaviour
 									//new mesh
 									ago = new GameObject (id_vert_msh);
 									godict [id_vert_msh] = ago;
+									//ago.transform.SetParent(parent.transform);
 									Mesh msh = rec_msh.new_vert_mesh (ago);
 									meshdict [id_vert_msh] = msh;
-									//ago.transform.parent = parent.transform;
+									ago.transform.parent = parent.transform;
 							}
 							rec_msh.process_options(godict [id_vert_msh], "point");
 					}
@@ -155,7 +170,6 @@ public class TCPInterface : MonoBehaviour
 							if (clientMessage.Length > 24 && clientMessage.Substring(clientMessage.Length - 25,25).Equals("UNITY_MESH_JSON_FORMATTED") )
 							{
 									//Debug.Log ("End of Message");
-									//Debug.Log(serverMessage);
 									sb.Append (clientMessage.Substring(0,clientMessage.Length - 25));
 									UnityMesh rec_msh = JsonUtility.FromJson<UnityMesh> (sb.ToString ());
 									meshqueue.Enqueue(rec_msh);	

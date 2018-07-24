@@ -158,7 +158,7 @@ public class UnityMesh
 	}
 
 	public void draw_text(GameObject parent){
-		foreach (Transform child in parent.transform) GameObject.Destroy(child.gameObject);
+		//foreach (Transform child in parent.transform) GameObject.Destroy(child.gameObject);
 		for (int i = 0; i < this.text.Length; i++) draw_text(parent, this.text[i], i);
 	}
 

@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture (RGB)", 2D) = "white" {}
-		_Size ("Size", Float) = 0.1
+		_Size ("Size", Float) = 0.03
 	}
 	SubShader
 	{
