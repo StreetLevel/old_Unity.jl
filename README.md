@@ -7,7 +7,7 @@
 # Unity.jl 
 ## A scientific visualization interface for Unity
 
-This library provides a TCP-Interface for the transmission of 3d mesh-data between Julia and Unity. 
+This library provides a TCP-Interface for the transmission of 3d mesh-data between Julia and Unity. The Unity part of this interface cleary could be used with any other programming language, like Matlab or the-like, without much effort. 
 
 
 ### Installation
