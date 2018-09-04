@@ -91,11 +91,10 @@ You should see something like this:
 * auto setup of tcp connection
 * simple gui for ip address etc.
 * partial transmission of meshes (e.g. only update the vertices or colors)
-* colorbar
+* colorbar (partly done)
 * coordinate axes
 * nicer transparency shader
 * nicer shader for line mesh
 * nicer shader and primitive for point mesh
-* quad meshes
 * point size
 
