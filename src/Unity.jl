@@ -194,7 +194,7 @@ function ColorBar(clrmap::BoundedColorMap)
     return vertices,faces,lines,colors,vals,b
 end
 
-function ColorBar(Id::String,clrmap::BoundedColorMap, alpha=0.4)
+function ColorBar(Id::String, clrmap::BoundedColorMap, alpha=0.4)
 
     vertices,faces,lines,colors,vals,b = ColorBar(clrmap)
     unity_vertices = map(x->UnityVector3(x[1]-8000,x[2]-8000,x[3]-105), vertices )

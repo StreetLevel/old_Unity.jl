@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
   
 
@@ -22,11 +23,15 @@ public class TCPInterface : MonoBehaviour
 		private static string id_tri = " Surface";
 		private static string id_line = " Line";
 		private static string id_vert = " Point";
+        //public GameObject SampleButton;
 		
 	
 		// Use this for initialization
 		void Start ()
 		{
+                GameObject button_clear = GameObject.Find("Button_clear");
+                button_clear.GetComponent<Button>().onClick.AddListener(reset_all);
+
 				meshdict = new Dictionary<string,Mesh> ();
 				godict = new Dictionary<string,GameObject> ();
 				meshqueue = new Queue<UnityMesh> ();
@@ -37,6 +42,17 @@ public class TCPInterface : MonoBehaviour
 				tcpListenerThread.Start(); 
 
 		}
+
+
+    public void reset_all ()
+    {
+        foreach(KeyValuePair<string,GameObject> entry in godict)
+        {
+            Destroy(entry.Value);      
+        }
+        godict.Clear();
+        meshdict.Clear();
+    }
 	
 		// Update is called once per frame
 		void Update ()
@@ -47,24 +63,50 @@ public class TCPInterface : MonoBehaviour
 					UnityMesh rec_msh = meshqueue.Dequeue();
 					GameObject ago = null;
 					GameObject parent = null;
+					string[] rec_ids = rec_msh.id.Split(":"[0]);
+					string rec_msh_id = rec_ids[0];
+					string id_spec = "";
+					if (rec_ids.Length>1){
+						id_spec = rec_ids[1];
+					}
 
-					if (godict.ContainsKey (rec_msh.id))
+					if (godict.ContainsKey (rec_msh_id))
 					{
-						parent = godict[rec_msh.id];
+						parent = godict[rec_msh_id];
 					}
 					else
 					{
-
+                
 						parent = new GameObject();
-						//parent = GameObject.CreatePrimitive(PrimitiveType.Cube);
-						//parent =  Instantiate (prefab, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
-        				parent.name = rec_msh.id;
-						godict[rec_msh.id] = parent;
+        				parent.name = rec_msh_id;
+						godict[rec_msh_id] = parent;
+                                           
+                        //GameObject button = (GameObject)Instantiate(SampleButton);
+                        GameObject prefab = GameObject.Find("Button_clear");
+                        GameObject button = (GameObject)Instantiate(prefab);
+                        GameObject panel = GameObject.Find("Panel_visible");
+                        button.transform.SetParent(panel.transform);//Setting button parent
+                                                                    //button.SetActive(true);
+                        button.GetComponent<Button>().onClick.RemoveAllListeners();
+                    
+                        //button.GetComponent<Button>().onClick.AddListener(OnClick);//Setting what button does when clicked
+                        button.GetComponent<Button>().onClick.AddListener(() => on_button_click(parent,button) );
+                        button.transform.GetChild(0).GetComponent<Text>().text = rec_msh_id;//Changing text
+
+                        Button thebutton = button.GetComponent<Button>();
+                        ColorBlock thecolor = button.GetComponent<Button>().colors;
+                        thecolor.normalColor = Color.green;
+                        thecolor.highlightedColor = Color.green;
+                        thecolor.pressedColor = Color.green;
+                        thebutton.colors = thecolor;
+
+                        godict[rec_msh_id + ":Button"] = button;
+
 					}
 
 					if (rec_msh.triangles.Length > 2) {
 							//triangle mesh
-							string id_tri_msh = rec_msh.id + id_tri;
+							string id_tri_msh = rec_msh_id + id_tri + " " + id_spec;
 							
 							if (meshdict.ContainsKey (id_tri_msh) && godict.ContainsKey (id_tri_msh)) {
 									
@@ -91,7 +133,8 @@ public class TCPInterface : MonoBehaviour
 					}
 					if (rec_msh.lines.Length > 1) {
 							//line mesh
-							string id_line_msh = rec_msh.id + id_line;
+							string id_tri_msh = rec_msh_id + id_tri + " " + id_spec;
+							string id_line_msh = rec_msh_id + " " + id_spec + " "+ id_line;
 							if (meshdict.ContainsKey (id_line_msh) && godict.ContainsKey (id_line_msh)) {
 									
 									//update mesh
@@ -116,7 +159,7 @@ public class TCPInterface : MonoBehaviour
 					}
 					if (rec_msh.points.Length > 0) {
 							//vertex mesh
-							string id_vert_msh = rec_msh.id + id_vert;
+							string id_vert_msh = rec_msh_id + id_vert + " " + id_spec;
 							if (meshdict.ContainsKey (id_vert_msh) && godict.ContainsKey (id_vert_msh)) {
 									
 									//update mesh
@@ -137,7 +180,7 @@ public class TCPInterface : MonoBehaviour
 							rec_msh.process_options(godict [id_vert_msh], "point");
 					}
 					if (ago!=null){
-						rec_msh.draw_text(parent);
+						rec_msh.draw_text(ago);
 					}
 					ago = null;
 					rec_msh = null;
@@ -209,5 +252,33 @@ public class TCPInterface : MonoBehaviour
 			Debug.Log("Socket exception: " + socketException);         
 		} 	
 	} 
+
+
+    public void on_button_click(GameObject o, GameObject b)
+    {
+        if (o.activeSelf)
+        {
+            o.SetActive(false);
+            Button thebutton = b.GetComponent<Button>();
+            ColorBlock thecolor = b.GetComponent<Button>().colors;
+            thecolor.normalColor = Color.red;
+            thecolor.highlightedColor = Color.red;
+            thecolor.pressedColor = Color.red;
+            thebutton.colors = thecolor;
+
+
+        }
+        else
+        {
+            o.SetActive(true);
+            Button thebutton = b.GetComponent<Button>();
+            ColorBlock thecolor = b.GetComponent<Button>().colors;
+            thecolor.normalColor = Color.green;
+            thecolor.highlightedColor = Color.green;
+            thecolor.pressedColor = Color.green;
+            thebutton.colors = thecolor;
+
+        }
+    }
 
 }

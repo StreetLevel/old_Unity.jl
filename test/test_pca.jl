@@ -1,7 +1,7 @@
 using GeometryTypes
 
-typealias AInt Int32  #const int = UInt32
-typealias AFloat Float32
+const AInt = Int32  
+const AFloat = Float32
 
 include("/Users/maximilianbittens/.julia/v0.6/Unity/src/MeshReaders.jl")
 include("/Users/maximilianbittens/.julia/v0.6/Unity/src/AnsysReader.jl")

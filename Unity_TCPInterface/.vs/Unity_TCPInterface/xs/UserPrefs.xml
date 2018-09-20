@@ -2,10 +2,11 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TCPInterface.cs">
     <Files>
-      <File FileName="Assets/Scripts/TCPInterface.cs" Line="154" Column="10" />
+      <File FileName="Assets/Scripts/DragPanel.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/AnimateMesh.cs" Line="18" Column="16" />
+      <File FileName="Assets/PostProcessing/Editor/PostProcessingBehaviourEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/TCPInterface.cs" Line="41" Column="5" />
       <File FileName="Assets/Scripts/UnityMesh.cs" Line="1" Column="1" />
-      <File FileName="Assets/ImageEffects/Scripts/PostEffectsBase.cs" Line="97" Column="49" />
-      <File FileName="Assets/Scripts/FlyCamera2.cs" Line="32" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
