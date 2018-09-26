@@ -222,6 +222,7 @@ public class TCPInterface : MonoBehaviour
                             {
                                 if (clientMessage.Length > 20 && clientMessage.Substring(clientMessage.Length - 21, 21).Equals("UNITY_CAMERA_SETTINGS"))
                                 {
+                                    Debug.Log("received");
                                     sb.Append(clientMessage.Substring(0, clientMessage.Length - 21));
                                     UnityCameraSettings com = JsonUtility.FromJson<UnityCameraSettings>(sb.ToString());
                                     com.process_command();
@@ -229,6 +230,7 @@ public class TCPInterface : MonoBehaviour
                                 }
                                 else
                                 {
+                                    Debug.Log(clientMessage);
                                     sb.Append(clientMessage);
                                 }
                             }

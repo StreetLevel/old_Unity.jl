@@ -23,19 +23,19 @@ public class UnityCameraSettings
 		GameObject maincam = GameObject.Find(Id);
 		if (this.main_camera_position.Length > 0 && this.main_camera_position.Length < 2)
 		{
-            maincam.transform.localPosition = main_camera_position[0];
+            maincam.transform.localPosition = this.main_camera_position[0];
 		}
 		if (this.main_camera_rotation.Length > 0 && this.main_camera_rotation.Length < 2)
 		{
-            maincam.transform.localEulerAngles = main_camera_rotation[0];
+            maincam.transform.localEulerAngles = this.main_camera_rotation[0];
 		}
 		if (this.main_camera_scale.Length > 0 && this.main_camera_scale.Length < 2)
 		{
-            maincam.transform.localScale = main_camera_scale[0];
+            maincam.transform.localScale = this.main_camera_scale[0];
 		}
 		if (this.background_color.Length > 0 && this.background_color.Length < 2)
 		{
-            maincam.GetComponent<Camera>().backgroundColor = background_color[0];
+            maincam.GetComponent<Camera>().backgroundColor = this.background_color[0];
 		}
 
 

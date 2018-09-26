@@ -65,7 +65,7 @@ function Base.write(socket::TCPSocket, um::UnityMesh)
     return retval
 end
 
-type UnityCameraSetting
+type UnityCameraSettings
     Id::String
     main_camera_position::UnityVector3
     main_camera_rotation::UnityVector3
@@ -75,7 +75,7 @@ end
 
 function Base.write(socket::TCPSocket, ucs::UnityCameraSetting)
     jum = JSON.json(ucs)
-    retval = write(socket, jum*"UNITY_CAMERA_SETTING")
+    retval = write(socket, jum*"UNITY_CAMERA_SETTINGS")
     sleep(.1)
     return retval
 end
