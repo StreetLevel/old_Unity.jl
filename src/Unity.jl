@@ -70,7 +70,7 @@ type UnityCameraSettings
     main_camera_position::Vector{UnityVector3} 
     main_camera_rotation::Vector{UnityVector3}
     main_camera_scale::Vector{UnityVector3}
-    background_color::Vector{UnityVector3}
+    background_color::Vector{UnityColor}
 end
 
 function Base.write(socket::TCPSocket, ucs::UnityCameraSettings)
