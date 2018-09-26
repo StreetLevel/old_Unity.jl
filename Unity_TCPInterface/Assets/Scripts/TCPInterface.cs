@@ -20,6 +20,7 @@ public class TCPInterface : MonoBehaviour
 		private Dictionary<string,Mesh> meshdict;
 		private Dictionary<string,GameObject> godict;
 		private Queue<UnityMesh> meshqueue;
+        private Queue<UnityCameraSettings> camsetqueue;
 		private static string id_tri = " Surface";
 		private static string id_line = " Line";
 		private static string id_vert = " Point";
@@ -35,6 +36,7 @@ public class TCPInterface : MonoBehaviour
 				meshdict = new Dictionary<string,Mesh> ();
 				godict = new Dictionary<string,GameObject> ();
 				meshqueue = new Queue<UnityMesh> ();
+                camsetqueue = new Queue<UnityCameraSettings>();
 
 				// Start Server
 				tcpListenerThread = new Thread (new ThreadStart(ListenForIncommingRequests)); 		
@@ -56,7 +58,13 @@ public class TCPInterface : MonoBehaviour
 	
 		// Update is called once per frame
 		void Update ()
-		{
+    {       
+        while (camsetqueue.Count > 0)
+            { 
+            UnityCameraSettings rec_set = camsetqueue.Dequeue();
+            GameObject cam = GameObject.Find(rec_set.Id);
+            rec_set.process_command(cam);
+            }
 		
 				while (meshqueue.Count > 0) {
 					
@@ -222,15 +230,14 @@ public class TCPInterface : MonoBehaviour
                             {
                                 if (clientMessage.Length > 20 && clientMessage.Substring(clientMessage.Length - 21, 21).Equals("UNITY_CAMERA_SETTINGS"))
                                 {
-                                    Debug.Log("received");
                                     sb.Append(clientMessage.Substring(0, clientMessage.Length - 21));
-                                    UnityCameraSettings com = JsonUtility.FromJson<UnityCameraSettings>(sb.ToString());
-                                    com.process_command();
+                                    UnityCameraSettings cam_settings = JsonUtility.FromJson<UnityCameraSettings>(sb.ToString());
+                                    Debug.Log(cam_settings.id);
+                                    camsetqueue.Enqueue(cam_settings);
                                     sb = new StringBuilder();
                                 }
                                 else
                                 {
-                                    Debug.Log(clientMessage);
                                     sb.Append(clientMessage);
                                 }
                             }

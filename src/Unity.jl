@@ -66,11 +66,11 @@ function Base.write(socket::TCPSocket, um::UnityMesh)
 end
 
 type UnityCameraSettings
-    Id::String
-    main_camera_position::UnityVector3
-    main_camera_rotation::UnityVector3
-    main_camera_scale::UnityVector3
-    background_color::UnityColor
+    id::String
+    main_camera_position::Vector{UnityVector3} 
+    main_camera_rotation::Vector{UnityVector3}
+    main_camera_scale::Vector{UnityVector3}
+    background_color::Vector{UnityVector3}
 end
 
 function Base.write(socket::TCPSocket, ucs::UnityCameraSettings)
