@@ -28,6 +28,7 @@ type UnityText
     pos::UnityVector3
     scale::UnityVector3
     rot::UnityVector3
+    #color::UnityColor
 end
 
 function Base.convert(::Type{UnityColor},c::ColorTypes.RGBA{Float32})
@@ -39,7 +40,6 @@ end
 #function Base.convert(::Vector{UInt32},x::Array{GeometryTypes.Face{3,Int32},1})
 #    vcat(map(xx->convert(Vector{UInt32},xx-1),x)...)
 #end
-
 
 #Unity mesh with c-like indexing
 type UnityMesh
@@ -65,6 +65,20 @@ function Base.write(socket::TCPSocket, um::UnityMesh)
     return retval
 end
 
+type UnityCameraSetting
+    Id::String
+    main_camera_position::UnityVector3
+    main_camera_rotation::UnityVector3
+    main_camera_scale::UnityVector3
+    background_color::UnityColor
+end
+
+function Base.write(socket::TCPSocket, ucs::UnityCameraSetting)
+    jum = JSON.json(ucs)
+    retval = write(socket, jum*"UNITY_CAMERA_SETTING")
+    sleep(.1)
+    return retval
+end
 
 #Unity Pyramid mesh with c-like indices
 type PyramidMesh

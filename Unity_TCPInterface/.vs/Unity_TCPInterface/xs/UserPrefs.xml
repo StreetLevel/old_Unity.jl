@@ -1,15 +1,21 @@
 ﻿<Properties StartupConfiguration="{7963B0F1-4493-AAE3-1DA5-54A678B1FBFF}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Pcx/Shaders/Disk.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UnityCameraSettings.cs">
     <Files>
       <File FileName="Assets/Scripts/DragPanel.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/AnimateMesh.cs" Line="74" Column="17" />
       <File FileName="Assets/PostProcessing/Editor/PostProcessingBehaviourEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TCPInterface.cs" Line="100" Column="61" />
+      <File FileName="Assets/Scripts/TCPInterface.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/UnityMesh.cs" Line="1" Column="1" />
       <File FileName="Assets/PointCloud/PointCloud.shader" Line="6" Column="31" />
       <File FileName="Assets/Pcx/Shaders/Disk.cginc" Line="1" Column="1" />
       <File FileName="Assets/Pcx/Shaders/Disk.shader" Line="11" Column="14" />
+      <File FileName="Assets/Shaders/heart.shader" Line="40" Column="37" />
+      <File FileName="Assets/Shaders/FluidVertex.shader" Line="1" Column="1" />
+      <File FileName="Assets/Pcx/Shaders/Point.shader" Line="1" Column="1" />
+      <File FileName="Assets/Shaders/CubeShader.shader" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DecalMeshHelperEditor.cs" Line="32" Column="1" />
+      <File FileName="Assets/Scripts/UnityCameraSettings.cs" Line="10" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

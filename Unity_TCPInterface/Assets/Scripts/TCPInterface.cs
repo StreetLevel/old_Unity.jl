@@ -133,7 +133,7 @@ public class TCPInterface : MonoBehaviour
 					}
 					if (rec_msh.lines.Length > 1) {
 							//line mesh
-							string id_tri_msh = rec_msh_id + id_tri + " " + id_spec;
+							//string id_tri_msh = rec_msh_id + id_tri + " " + id_spec;
 							string id_line_msh = rec_msh_id + " " + id_spec + " "+ id_line;
 							if (meshdict.ContainsKey (id_line_msh) && godict.ContainsKey (id_line_msh)) {
 									
@@ -208,20 +208,30 @@ public class TCPInterface : MonoBehaviour
 							var incommingData = new byte[length]; 							
 							Array.Copy(bytes, 0, incommingData, 0, length);  							
 							// Convert byte array to string message. 							
-							string clientMessage = Encoding.ASCII.GetString(incommingData); 							
-							//Debug.Log("client message received as: " + clientMessage); 						
-							if (clientMessage.Length > 24 && clientMessage.Substring(clientMessage.Length - 25,25).Equals("UNITY_MESH_JSON_FORMATTED") )
-							{
-									//Debug.Log ("End of Message");
-									sb.Append (clientMessage.Substring(0,clientMessage.Length - 25));
-									UnityMesh rec_msh = JsonUtility.FromJson<UnityMesh> (sb.ToString ());
-									meshqueue.Enqueue(rec_msh);	
-									sb = new StringBuilder ();
-							}
-							else
-							{
-								sb.Append (clientMessage);	
-							}
+							string clientMessage = Encoding.ASCII.GetString(incommingData);
+                            //Debug.Log("client message received as: " + clientMessage); 						
+                            if (clientMessage.Length > 24 && clientMessage.Substring(clientMessage.Length - 25, 25).Equals("UNITY_MESH_JSON_FORMATTED"))
+                            {
+                                //Debug.Log ("End of Message");
+                                sb.Append(clientMessage.Substring(0, clientMessage.Length - 25));
+                                UnityMesh rec_msh = JsonUtility.FromJson<UnityMesh>(sb.ToString());
+                                meshqueue.Enqueue(rec_msh);
+                                sb = new StringBuilder();
+                            }
+                            else
+                            {
+                                if (clientMessage.Length > 20 && clientMessage.Substring(clientMessage.Length - 21, 21).Equals("UNITY_CAMERA_SETTINGS"))
+                                {
+                                    sb.Append(clientMessage.Substring(0, clientMessage.Length - 21));
+                                    UnityCameraSettings com = JsonUtility.FromJson<UnityCameraSettings>(sb.ToString());
+                                    com.process_command();
+                                    sb = new StringBuilder();
+                                }
+                                else
+                                {
+                                    sb.Append(clientMessage);
+                                }
+                            }
 						} 					
 					} 				
 				} 			

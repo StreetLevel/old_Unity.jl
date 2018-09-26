@@ -19,7 +19,7 @@
          
          Lighting On 
          Fog { Mode Off }
-         ZWrite Off
+         //ZWrite Off
          Blend SrcAlpha OneMinusSrcAlpha
 
          LOD 200

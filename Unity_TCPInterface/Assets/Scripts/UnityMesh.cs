@@ -77,7 +77,7 @@ public class UnityMesh
 		gameObject.AddComponent(typeof(MeshRenderer));
 		MeshFilter filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
 		filter.mesh = msh;
-		gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/Custom") );
+		gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Unlit/ThickLine") );
 		return msh;
 	}
 
@@ -95,7 +95,8 @@ public class UnityMesh
 		gameObject.AddComponent(typeof(MeshRenderer));
 		MeshFilter filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
 		filter.mesh = msh;
-		gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Point Cloud/Disk") );
+		//gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Point Cloud/Disk") );
+		gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/CubeShader") );
 		return msh;
 	}
 
@@ -123,14 +124,17 @@ public class UnityMesh
 		{	
 			
 			string[] strArr = this.options[i].Split("="[0]);
-
-			if (strArr[0].Trim().Equals(str+"_shader")){
+			if (strArr[0].Trim().Equals(str+"_shader") && str.Equals("surface")){
 				//Debug.Log(strArr[1].Trim());
 				set_surface_shader_options(gameObject,strArr[1].Trim());
 			}
-			if (strArr[0].Trim().Equals(str+"_size")){
+			if (strArr[0].Trim().Equals(str+"_size") && str.Equals("point") ){
 				//Debug.Log(strArr[1].Trim());
 				set_point_shader_size(gameObject, float.Parse( strArr[1].Trim() ) );
+			}
+			if (strArr[0].Trim().Equals(str+"_width") && str.Equals("line") ){
+				//Debug.Log(strArr[1].Trim());
+				set_line_shader_width(gameObject, float.Parse( strArr[1].Trim() ) );
 			}
 
 		}
@@ -148,13 +152,17 @@ public class UnityMesh
 			gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/StandardVertex") );
 		}
 		if (option.Equals("transparent")){
-			gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/Alpha") );
+			gameObject.GetComponent<Renderer>().material = new Material( Shader.Find("Custom/VertexColors2") );
 		}
 
 	}
 
 	public void set_point_shader_size(GameObject gameObject, float size){
 		gameObject.GetComponent<Renderer>().material.SetFloat("_PointSize", size);
+	}
+
+		public void set_line_shader_width(GameObject gameObject, float size){
+		gameObject.GetComponent<Renderer>().material.SetFloat("_Width", size);
 	}
 
 	public void draw_text(GameObject parent){
