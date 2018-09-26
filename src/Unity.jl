@@ -28,7 +28,7 @@ type UnityText
     pos::UnityVector3
     scale::UnityVector3
     rot::UnityVector3
-    #color::UnityColor
+    color::UnityColor
 end
 
 function Base.convert(::Type{UnityColor},c::ColorTypes.RGBA{Float32})

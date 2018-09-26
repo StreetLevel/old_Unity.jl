@@ -62,7 +62,7 @@ public class TCPInterface : MonoBehaviour
         while (camsetqueue.Count > 0)
             { 
             UnityCameraSettings rec_set = camsetqueue.Dequeue();
-            GameObject cam = GameObject.Find(rec_set.Id);
+            GameObject cam = GameObject.Find(rec_set.id);
             rec_set.process_command(cam);
             }
 		
@@ -188,6 +188,9 @@ public class TCPInterface : MonoBehaviour
 							rec_msh.process_options(godict [id_vert_msh], "point");
 					}
 					if (ago!=null){
+                        var children = new List<GameObject>();
+                        foreach (Transform child in ago.transform) children.Add(child.gameObject);
+                        children.ForEach(child => Destroy(child));
 						rec_msh.draw_text(ago);
 					}
 					ago = null;
@@ -232,7 +235,6 @@ public class TCPInterface : MonoBehaviour
                                 {
                                     sb.Append(clientMessage.Substring(0, clientMessage.Length - 21));
                                     UnityCameraSettings cam_settings = JsonUtility.FromJson<UnityCameraSettings>(sb.ToString());
-                                    Debug.Log(cam_settings.id);
                                     camsetqueue.Enqueue(cam_settings);
                                     sb = new StringBuilder();
                                 }

@@ -174,6 +174,7 @@ public class UnityMesh
 		GameObject textobject = new GameObject ("Text "+ i.ToString());
 		TextMesh t = textobject.AddComponent<TextMesh>();
 		t.text = text.text;
+        t.color = text.color;
  		t.fontSize = 20;
  		t.transform.localEulerAngles = text.rot;
  		t.transform.position = text.pos;
