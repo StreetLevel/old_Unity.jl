@@ -73,7 +73,7 @@ type UnityCameraSettings
     background_color::UnityColor
 end
 
-function Base.write(socket::TCPSocket, ucs::UnityCameraSetting)
+function Base.write(socket::TCPSocket, ucs::UnityCameraSettings)
     jum = JSON.json(ucs)
     retval = write(socket, jum*"UNITY_CAMERA_SETTINGS")
     sleep(.1)
