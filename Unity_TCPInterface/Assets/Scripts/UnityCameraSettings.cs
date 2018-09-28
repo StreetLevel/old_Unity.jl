@@ -12,6 +12,7 @@ public class UnityCameraSettings
 	public Vector3[] main_camera_rotation;
 	public Vector3[] main_camera_scale;
 	public Color[] background_color;
+	public bool[] perspective;
 	
     
 
@@ -37,7 +38,16 @@ public class UnityCameraSettings
 		{
             cam.GetComponent<Camera>().backgroundColor = this.background_color[0];
 		}
-
+		if (this.perspective.Length > 0 && this.perspective.Length < 2)
+		{
+            if (this.perspective[0]){
+				cam.GetComponent<Camera>().orthographic = false;
+			}
+			else{
+				cam.GetComponent<Camera>().orthographic = true;
+			}
+            
+		}
 
 	}
 

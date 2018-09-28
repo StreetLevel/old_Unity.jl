@@ -67,10 +67,11 @@ end
 
 type UnityCameraSettings
     id::String
-    main_camera_position::Vector{UnityVector3} 
+    main_camera_position::Vector{UnityVector3} #should be all vectors of length 0 or 1
     main_camera_rotation::Vector{UnityVector3}
     main_camera_scale::Vector{UnityVector3}
     background_color::Vector{UnityColor}
+    perspective::Vector{Bool}
 end
 
 function Base.write(socket::TCPSocket, ucs::UnityCameraSettings)
