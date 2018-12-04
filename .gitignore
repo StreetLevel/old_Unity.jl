@@ -12,10 +12,10 @@ src/AnsysReader.jl
 src/MeshReaders.jl
 src/PatranReader.jl
 Unity_TCPInterface/Library
-Unity_TCPInterface/Temp
-Unity_TCPInterface/ProjectSettings
-Unity_TCPInterface/UnityPackageManager
-Unity_TCPInterface/obj
+Unity_TCPInterface/Temp/**
+Unity_TCPInterface/ProjectSettings/**
+Unity_TCPInterface/UnityPackageManager/**
+Unity_TCPInterface/obj/**
 
 
 

@@ -14,16 +14,16 @@ using UnityEditor;
 public class TCPInterface : MonoBehaviour
 {	
 
-		private TcpListener tcpListener; 
-		private Thread tcpListenerThread;  	
-		private TcpClient connectedTcpClient; 	
-		private Dictionary<string,Mesh> meshdict;
-		private Dictionary<string,GameObject> godict;
-		private Queue<UnityMesh> meshqueue;
-        private Queue<UnityCameraSettings> camsetqueue;
-		private static string id_tri = " Surface";
-		private static string id_line = " Line";
-		private static string id_vert = " Point";
+	private TcpListener tcpListener; 
+	private Thread tcpListenerThread;  	
+	private TcpClient connectedTcpClient; 	
+	private Dictionary<string,Mesh> meshdict;
+	private Dictionary<string,GameObject> godict;
+	private Queue<UnityMesh> meshqueue;
+    private Queue<UnityCameraSettings> camsetqueue;
+	private static string id_tri = " Surface";
+	private static string id_line = " Line";
+	private static string id_vert = " Point";
     public Shader shader_transparent;
     public Shader shader_smooth;
     public Shader shader_flat;
@@ -31,6 +31,7 @@ public class TCPInterface : MonoBehaviour
     public Shader shader_point;
     public Shader shader_line;
     public Dictionary<string, Shader> shaders;
+    private bool flag_reset_all = false;
 		
 	
 		// Use this for initialization
@@ -211,6 +212,12 @@ public class TCPInterface : MonoBehaviour
 					rec_msh = null;
 						
 				}
+
+				if (flag_reset_all)
+				{
+					flag_reset_all = false;
+					reset_all ();
+				}
 		 
 		}
 
@@ -254,7 +261,15 @@ public class TCPInterface : MonoBehaviour
                                 }
                                 else
                                 {
-                                    sb.Append(clientMessage);
+                                	if (clientMessage.Length > 14 && clientMessage.Substring(clientMessage.Length - 15, 15).Equals("UNITY_RESET_ALL"))
+                                	{
+                                		flag_reset_all = true;
+                                		sb = new StringBuilder();
+                                	}
+                                	else
+                                	{
+                                    	sb.Append(clientMessage);
+                                	}
                                 }
                             }
 						} 					

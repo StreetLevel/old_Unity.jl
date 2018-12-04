@@ -81,12 +81,20 @@ function Base.write(socket::TCPSocket, ucs::UnityCameraSettings)
     return retval
 end
 
+function clear(socket::TCPSocket)
+    retval = write(socket, "UNITY_RESET_ALL")
+    sleep(.1)
+    return retval
+end
+
+
 #Unity Pyramid mesh with c-like indices
 type PyramidMesh
     id::String
     vertices::Vector{UnityVector3}
     pyramids::Vector{UInt32}
     colors::Vector{ColorTypes.RGBA{Float32}}
+    options::Vector{String}
 end
 
 begin
@@ -114,7 +122,7 @@ function Base.convert(::Type{UnityMesh},msh::PyramidMesh,pattern::Vector{Int})
             ]
             )
     end
-    return UnityMesh(msh.id,msh.vertices,UInt32[],UInt32[],triangles,msh.colors)
+    return UnityMesh(msh.id,msh.vertices,UInt32[],UInt32[],triangles,msh.colors,msh.options)
 end
 
 function convert_and_duplicate(::Type{UnityMesh},msh::PyramidMesh,pattern::Vector{Int})
@@ -144,7 +152,7 @@ function convert_and_duplicate(::Type{UnityMesh},msh::PyramidMesh,pattern::Vecto
 
     triangles = UInt32[i-1 for i = 1:length(vertices)]
 
-    return UnityMesh(id,vertices,points,lines,triangles,colors)
+    return UnityMesh(id,vertices,points,lines,triangles,colors,msh.options)
 
 end
 
