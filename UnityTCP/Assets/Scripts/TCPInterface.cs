@@ -32,6 +32,7 @@ public class TCPInterface : MonoBehaviour
     public Shader shader_line;
     public Dictionary<string, Shader> shaders;
     private bool flag_reset_all = false;
+    private bool all_visible = true;
 		
 	
 		// Use this for initialization
@@ -39,6 +40,9 @@ public class TCPInterface : MonoBehaviour
 		{
                 GameObject button_clear = GameObject.Find("Button_clear");
                 button_clear.GetComponent<Button>().onClick.AddListener(reset_all);
+
+                GameObject button_toggle = GameObject.Find("Button_toggle");
+                button_toggle.GetComponent<Button>().onClick.AddListener(toggle_all);
 
 				meshdict = new Dictionary<string,Mesh> ();
 				godict = new Dictionary<string,GameObject> ();
@@ -69,6 +73,25 @@ public class TCPInterface : MonoBehaviour
         }
         godict.Clear();
         meshdict.Clear();
+    }
+
+    public void toggle_all ()
+    {
+    	all_visible = !all_visible;
+        foreach(KeyValuePair<string,GameObject> entry in godict)
+        {
+         if (entry.Value.GetComponent<Button>())
+         {
+
+         	ColorBlock thecolor = entry.Value.GetComponent<Button>().colors;
+            
+         	if ( (thecolor.normalColor == Color.red && all_visible) || (thecolor.normalColor == Color.green && !all_visible) )
+         	{
+         		entry.Value.GetComponent<Button>().onClick.Invoke();
+         	}
+         	
+         }
+        }
     }
 	
 		// Update is called once per frame
